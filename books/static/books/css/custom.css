@@ -16,6 +16,10 @@ body{
 		background-color: #ededed;
 	}
 }*/
+#search-nav {
+	height: 60px !important;
+}
+
 .likelabel {
 	left: 0.75rem;
 	top: -14px;
