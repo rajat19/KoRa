@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		{% block title %}Kora{% endblock %}
+	</title>
+	{% load staticfiles %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content="Book Sharing App">
+	<meta name="author" content="Rajat Srivastava">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/fonts.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/materialize.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/fontawe/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/sweetalert2.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/custom.css' %}">
+</head>
+<body>
+	<div class="navbar-fixed">
+		<ul class="side-nav red darken-3" id="mobili">
+			<li><a href="#">Login</a></li>
+			<li><a href="#">Books</a></li>
+			<li><a href="#">Series</a></li>
+			<li>
+				<form action="" method="GET">
+					<div class="input-field col s4">
+						<input type="text" name="search" id="search" placeholder="Search Books...">
+						<button class="btn green" type="submit">Search</button>
+					</div>
+				</form>
+			</li>
+			<li><a href="">Add Books</a></li>
+			<li><a href="">Logout</a></li>
+		</ul>
+
+		<nav class="red darken-3">
+			<div class="nav-wrapper" style="padding-left: 10px">
+				<a class="brand-logo">Kora</a>
+				<a href="#" data-activates="mobili" class="button-collapse"><span><i class="fa fa-reorder"></i></span></a>
+				<ul id="deski" class="right hide-on-med-and-down" style="padding-right: 10px;">
+					<li><a href="#">Login</a></li>
+					<li><a href="#">Books</a></li>
+					<li><a href="#">Series</a></li>
+					<li>
+						<form action="" method="GET" class="inline">
+							<div class="row">
+								<div class="input-field col s7 white black-text">
+									<input type="text" name="search" id="search" placeholder="Search Books...">
+								</div>
+								<div class="input-field col s3">
+									<button class="btn green" type="submit">Search</button>
+								</div>
+							</div>
+						</form>
+					</li>
+					<li><a href="">Add Books</a></li>
+					<li><a href="">Logout</a></li>	
+				</ul>
+			</div>
+		</nav>
+	</div>
+
+	<div class="container">
+		{% block body%}{% endblock %}
+	</div>
+
+	<script type="text/javascript" src="{% static 'books/js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/materialize.clockpicker.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/pagination.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/sweetalert2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/custom.js' %}"></script>
+</body>
+</html>
