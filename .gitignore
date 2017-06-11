@@ -47,6 +47,6 @@ Temporary Items
 .apdisk
 
 # Python directories
-books/migrations/*
 __pycache__/*
 *.pyc
+media/
