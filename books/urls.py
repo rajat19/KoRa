@@ -1,7 +1,6 @@
 from django.conf.urls import url
 from . import views
 
-
 app_name = 'books'
 
 urlpatterns = [
@@ -13,8 +12,11 @@ urlpatterns = [
 	# /books/add/
 	url(r'^add/$', views.BookCreate.as_view(), name='book-add'),
 
-	# /books/2/
-	url(r'^(?P<pk>[0-9]+)/$', views.BookUpdate.as_view(), name='book-update'),
+	# /books/upload/
+	url(r'^upload/$', views.BookUpload.as_view(), name='upload'),
+
+	# /books/2/update
+	url(r'^(?P<pk>[0-9]+)/update/$', views.BookUpdate.as_view(), name='book-update'),
 
 	# /books/2/delete
 	url(r'^(?P<pk>[0-9]+)/delete/$', views.BookDelete.as_view(), name='book-delete'),
@@ -23,11 +25,11 @@ urlpatterns = [
 	url(r'^series/(?P<pk>[0-9]+)/$', views.SeriesView.as_view(), name="series"),
 
 	# /books/series/add
-	url(r'^series/add/(?P<pk>[0-9]+)/$', views.SeriesCreate.as_view(), name="series-add"),
+	url(r'^series/add', views.SeriesCreate.as_view(), name="series-add"),
 
 	# /books/series/2/delete
 	# url(r'^series/(?P<pk>[0-9]+)/delete/$', views.SeriesDelete.as_view(), name="series-delete"),
 
 	# search/harry potter
-	# url(r'^search/(?P[a-zA-Z0-9 ]+)/$', views.SearchBook.as_view(), name="search"),
+	# url(r'^search/(?P<name>[a-zA-Z0-9 ]+)/$', views.SearchBook.as_view(), name="search"),
 ]

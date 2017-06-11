@@ -59,10 +59,10 @@ body{
 	font-weight: bold !important;
 }
 
-.dropdown-content {
+/*.dropdown-content {
 	position: inherit !important;
 	color: white !important;
-}
+}*/
 
 .dropdown-content li>a{
 	color: white !important;

@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	Materialize.updateTextFields();
 	$(".button-collapse").off("click").sideNav();
 	$('#sidenav-overlay').remove();
 	$('select').material_select();

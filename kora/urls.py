@@ -7,7 +7,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^account/', include('account.urls')),
     url(r'^books/', include('books.urls')),
-    # url(r'^music/', include('music.urls'))
 ]
 
 if settings.DEBUG:

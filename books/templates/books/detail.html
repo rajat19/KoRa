@@ -1,0 +1,77 @@
+{% extends 'books/base.html' %}
+
+{% block title %}{{ book.title }}{% endblock %}
+
+{% block body %}
+	<section>
+		<div class="row">
+			<div class="col s10 offset-s1">
+				<div class="card z-depth-5">
+					<div class="card-content blue-grey lighten-4">
+						<span class="card-title center">{{book.title}}</span>
+						<div class="row">
+							<div class="col s4 center">
+								{% if book.logo_file %}
+									<img src="{{ book.logo_file.url }}" class="img responsive-img" style="height: 300px">
+								{% elif book.logo %}
+									<img src="{{ book.logo }}" class="img responsive-img" style="height: 300px">
+								{% endif %}
+								<div>
+									<a class="btn red" href="{% url 'books:book-delete' book.id %}"><i class="fa fa-trash-o"></i></a>
+									<a class="btn green" href="{% url 'books:book-update' book.id %}"><i class="fa fa-edit"></i></a>
+								</div>
+							</div>
+							<div class="col s8">
+								<table>
+									<tr>
+										<td>Author: </td>
+										<td>{{ book.author }}</td>
+										<td>Genre: </td>
+										<td>{{ book.genre }}</td>
+									</tr>
+									<tr>
+										<td>Language: </td>
+										<td>{{ book.language }}</td>
+										<td>Year: </td>
+										<td>{{ book.year }}</td>
+									</tr>
+									<tr>
+										<td>Synopsis: </td>
+										<td colspan="3">{{ book.synopsis }}</td>
+									</tr>
+								</table>
+								<div class="red" style="height: 2px"></div>
+								<table class="bordered">
+									<thead>
+										<tr>
+											<th class="center">Uploader</th>
+											<th class="center">File Type</th>
+											<th class="center">Download</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for upload in book.upload_set.all %}
+											<tr>
+												<td class="center">{{ upload.uploader.username }}</td>
+												<td class="center">{{ upload.extension }}</td>
+												<td class="center">
+													<a class="btn blue-grey darken-3" href="{{ upload.file.url }}">
+														Download <i class="fa fa-download"></i>
+													</a>
+												</td>
+											</tr>
+											{% empty %}
+											<tr>
+												<td class="center red-text" colspan="3">No File Uploaded yet</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</section>
+{% endblock %}
