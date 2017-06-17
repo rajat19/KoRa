@@ -4,7 +4,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
-from .models import Book, Series, Search, Upload
+from .models import Book, Series, Search, Upload, Author
 from .forms import BookForm, UploadForm
 
 class IndexView(generic.ListView):
@@ -61,3 +61,18 @@ class SearchBook(View):
 
 	def post(self, request):
 		pass
+
+class AuthorsView(generic.ListView):
+	template_name = 'books/authors.html'
+	context_object_name = 'all_authors'
+
+	def get_queryset(self):
+		return Author.objects.all().order_by('name')
+
+class AuthorView(generic.DetailView):
+	model = Author
+	template_name = 'books/author.html'
+
+class AuthorCreate(CreateView):
+	model = Author
+	fields = ['name', 'country']

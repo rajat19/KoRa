@@ -5,12 +5,12 @@
 {% block body %}
 	<section>
 		<div class="row">
-			<div class="col s10 offset-s1">
+			<div class="col m10 s12 offset-m1">
 				<div class="card z-depth-5">
 					<div class="card-content blue-grey lighten-4">
 						<span class="card-title center">{{book.title}}</span>
 						<div class="row">
-							<div class="col s4 center">
+							<div class="col m4 s12 center">
 								{% if book.logo_file %}
 									<img src="{{ book.logo_file.url }}" class="img responsive-img" style="height: 300px">
 								{% elif book.logo %}
@@ -21,11 +21,11 @@
 									<a class="btn green" href="{% url 'books:book-update' book.id %}"><i class="fa fa-edit"></i></a>
 								</div>
 							</div>
-							<div class="col s8">
+							<div class="col m8">
 								<table>
 									<tr>
 										<td>Author: </td>
-										<td>{{ book.author }}</td>
+										<td><a class="blue-grey-text" href="{% url 'books:author' book.author.id %}">{{ book.author }}</a></td>
 										<td>Genre: </td>
 										<td>{{ book.genre }}</td>
 									</tr>

@@ -2,23 +2,38 @@
 <html>
 <head>
 	<title>
-		{% block title %}My Account{% endblock %}
+		{% block title %}Kora Kagaz{% endblock %}
 	</title>
 	{% load staticfiles %}
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/fonts/roboto/Roboto-Bold.woff">
-	<link href="https://fonts.googleapis.com/css?family=Exo" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'account/style.css' %}">
+	<meta name="description" content="Book Sharing App">
+	<meta name="author" content="Rajat Srivastava">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/fonts.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/materialize.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/fontawe/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/sweetalert2.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'books/css/custom.css' %}">
+	<style type="text/css">
+		body {
+			background-image: url('{% static 'books/images/a5.jpg' %}') !important;
+			background-size: cover;
+		}
+	</style>
 </head>
 <body>
-	<div class="navbar-fixed">
-		<ul class="side-nav red darken-3" id="mobile-version">
-			<li><a href=""></a></li>
-		</ul>
+
+	<div class="container" style="margin-top: 50px;">
+		{% block body%}{% endblock %}
 	</div>
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+	<script type="text/javascript" src="{% static 'books/js/jquery.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/jquery-ui.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/materialize.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/materialize.clockpicker.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/pagination.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/sweetalert2.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'books/js/custom.js' %}"></script>
+
+	{% block script %}{% endblock %}
 </body>
 </html>

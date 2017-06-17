@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views import generic
+from django.views.generic.edit import CreateView
 from django.contrib.auth import authenticate, login
 from django.views.generic import View
 from .forms import RegistrationForm
@@ -32,11 +33,16 @@ class RegisterView(View):
 
 				if user.is_active:
 					login(request, user)
-					return redirect('account:profile')
+					return redirect('account:profile-create')
 
 		# if login fails
 		return render(request, self.template_name, {'form': form})
 		
+class ProfileCreate(CreateView):
+	model = Profile
+	fields = ['fullname', 'gender', 'birth_date', 'contact', 'organization', 'photo']
+	template_name = 'account/create_profile.html'
+
 class ProfileView(generic.ListView):
 	model = Profile
 	template_name= 'account/profile.html'

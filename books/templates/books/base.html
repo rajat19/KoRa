@@ -13,39 +13,67 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'books/fontawe/css/font-awesome.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'books/css/sweetalert2.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'books/css/custom.css' %}">
+	<style type="text/css">
+		body {
+			background-size: cover;
+			opacity: 0.8
+		}
+		.a2 {
+			background-image: url('{% static 'books/images/a2.jpg' %}') !important;
+		}
+		.a3 {
+			background-image: url('{% static 'books/images/a3.jpg' %}') !important;
+		}
+		.a4 {
+			background-image: url('{% static 'books/images/a4.jpg' %}') !important;
+		}
+		.a5 {
+			background-image: url('{% static 'books/images/a5.jpg' %}') !important;
+		}				
+	</style>
 </head>
-<body>
+<body class="{% block bgimg %}a5{% endblock %}">
 	<div class="navbar-fixed">
-		<ul class="dropdown-content light-blue darken-2" id="dropdown-add">
+		<ul class="dropdown-content deep-purple darken-2" id="dropdown-add">
 			<li><a href="{% url 'books:series-add' %}">Add Series</a></li>
 			<li><a href="{% url 'books:book-add' %}">Add Books</a></li>
+			<li><a href="{% url 'books:author-add' %}">Add Authors</a></li>
+		</ul>
+		<ul class="dropdown-content deep-purple darken-2" id="dropdown-book">
+			<li><a href="{% url 'books:index' %}">All</a></li>
+			<li><a href="{% url 'books:authors' %}">By Authors</a></li>
 		</ul>
 
-		<ul class="side-nav light-blue darken-2" id="mobili">
-			<ul class="dropdown-content light-blue darken-2" id="dropdown-add">
+		<ul class="side-nav deep-purple darken-2" id="mobili">
+			<ul class="dropdown-content deep-purple darken-2" id="dropdown-add">
 				<li><a href="{% url 'books:series-add' %}">Add Series</a></li>
 				<li><a href="{% url 'books:book-add' %}">Add Books</a></li>
+				<li><a href="{% url 'books:author-add' %}">Add Authors</a></li>
+			</ul>
+			<ul class="dropdown-content deep-purple darken-2" id="dropdown-book">
+				<li><a href="{% url 'books:index' %}">All</a></li>
+				<li><a href="{% url 'books:authors' %}">By Authors</a></li>
 			</ul>
 
 			<li>
 				<form action="" method="GET">
 					<div class="input-field col s4">
 						<input type="text" name="search" id="search" placeholder="Search Books...">
-						<button class="btn green" type="submit">Search</button>
+						<button class="btn deep-purple" type="submit">Search</button>
 					</div>
 				</form>
 			</li>
-			<li><a href="#">Login</a></li>
+			<!-- <li><a href="#">Login</a></li> -->
 			<li><a href="{% url 'books:index' %}">Books</a></li>
 			<li><a href="#">Series</a></li>
 			<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <span><i class="fa fa-angle-down"></i></span></a></li>
 			<li><a href="{% url 'books:upload' %}">Upload</a></li>
-			<li><a href="">Logout</a></li>
+			<li><a href="{% url 'account:logout' %}">Logout</a></li>
 		</ul>
 
-		<nav class="light-blue darken-2">
+		<nav class="deep-purple accent-1">
 			<div class="nav-wrapper" style="padding-left: 10px">
-				<a class="brand-logo">Kora Kagaz <i class="fa fa-book"></i></a>
+				<a class="brand-logo">Kora Kagaz</a>
 				<a href="#" data-activates="mobili" class="button-collapse"><span><i class="fa fa-reorder"></i></span></a>
 				<ul id="deski" class="right hide-on-med-and-down" style="padding-right: 10px;">
 					<li>
@@ -57,12 +85,12 @@
 							</div>
 						</form>
 					</li>
-					<li><a href="#">Login</a></li>
-					<li><a href="{% url 'books:index' %}">Books</a></li>
+					<!-- <li><a href="#">Login</a></li> -->
+					<li><a href="#!" class="dropdown-button" data-activates="dropdown-book">Book List <i class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="#">Series</a></li>
 					<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <i class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="{% url 'books:upload' %}">Upload</a></li>
-					<li><a href="">Logout</a></li>	
+					<li><a href="{% url 'account:logout' %}">Logout</a></li>
 				</ul>
 			</div>
 		</nav>

@@ -1,5 +1,12 @@
 body{
   font-family: 'Pangolin', cursive !important;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main{
+	flex: 1 0 auto
 }
 /*@media only screen and (min-width: 600px) {
 	.backcover {
@@ -90,3 +97,4 @@ body{
     display: inline-block;
     vertical-align: middle;
 }
+

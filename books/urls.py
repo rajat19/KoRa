@@ -32,4 +32,13 @@ urlpatterns = [
 
 	# search/harry potter
 	# url(r'^search/(?P<name>[a-zA-Z0-9 ]+)/$', views.SearchBook.as_view(), name="search"),
+
+	# /books/authors
+	url(r'^authors/$', views.AuthorsView.as_view(), name='authors'),
+
+	# /books/author/Jeffrey Archer
+	url(r'^author/(?P<pk>[0-9]+)/$', views.AuthorView.as_view(), name="author"),
+
+	# /books/author/add
+	url(r'^author/add', views.AuthorCreate.as_view(), name="author-add"),	
 ]

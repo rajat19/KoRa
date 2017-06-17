@@ -5,14 +5,18 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	fullname = models.CharField(max_length=100, default='')
 	gender = models.CharField(max_length=10)
 	birth_date = models.DateField(null=True)
-	address = models.TextField(max_length=200, null=True)
-	country = models.CharField(max_length=50, null=True)
-	contact = models.CharField(max_length=10, null=True)
+	contact = models.CharField(max_length=10, null=True, blank=True)
+	photo = models.FileField(blank=True, null=True)
+	organization = models.CharField(max_length=100, blank=True, default='')
 
 	def __str__(self):
 		return self.user.username
+
+	def get_absolute_url(self):
+		return reverse('account:profile', kwargs={'pk': self.pk})
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
