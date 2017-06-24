@@ -5,6 +5,10 @@ body{
   flex-direction: column;
 }
 
+.samarkan{
+	font-family: 'Samarkan' !important;
+}
+
 main{
 	flex: 1 0 auto
 }
@@ -98,3 +102,12 @@ main{
     vertical-align: middle;
 }
 
+.img-enhance {
+	-webkit-transition:-webkit-box-shadow .6s,background 2s,-webkit-border-radius .1s;
+}
+
+.img-enhance:hover {
+	-webkit-box-shadow:#ff8a65 10px 10px;
+	-webkit-border-radius:5px;
+	/*background:-webkit-linear-gradient(60deg,orange,white);*/
+}

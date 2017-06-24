@@ -23,6 +23,14 @@
   font-weight: bold;
 }
 
+@font-face {
+  font-family: Samarkan;
+  src: local("Samarkan Normal"),
+       local("Samarkan"),
+       url(../fonts/Samarkan.ttf);
+  font-weight: bold;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
