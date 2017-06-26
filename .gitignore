@@ -49,4 +49,4 @@ Temporary Items
 # Python directories
 __pycache__/*
 *.pyc
-media/
+# media/
