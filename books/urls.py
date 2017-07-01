@@ -1,3 +1,4 @@
+# from django.contrib.auth.decorators import login_required, permission_required
 from django.conf.urls import url
 from . import views
 
@@ -40,5 +41,5 @@ urlpatterns = [
 	url(r'^author/(?P<pk>[0-9]+)/$', views.AuthorView.as_view(), name="author"),
 
 	# /books/author/add
-	url(r'^author/add', views.AuthorCreate.as_view(), name="author-add"),	
+	url(r'^author/add', views.AuthorCreate.as_view(), name="author-add"),
 ]
