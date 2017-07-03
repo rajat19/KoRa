@@ -29,10 +29,10 @@
 		}
 		.a5 {
 			background-image: url('{% static 'books/images/a5.jpg' %}') !important;
-		}	
+		}
 		.a7 {
-			background-image: url('{% static 'books/images/a8.jpg' %}') !important;	
-		}			
+			background-image: url('{% static 'books/images/a8.jpg' %}') !important;
+		}
 	</style>
 </head>
 <body class="{% block bgimg %}a5{% endblock %}">
@@ -88,12 +88,15 @@
 							</div>
 						</form>
 					</li>
-					<!-- <li><a href="#">Login</a></li> -->
 					<li><a href="#!" class="dropdown-button" data-activates="dropdown-book">Book List <i class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="#">Series</a></li>
 					<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <i class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="{% url 'books:upload' %}">Upload</a></li>
-					<li><a href="{% url 'account:logout' %}">Logout</a></li>
+					{% if request.user.is_authenticated %}
+						<li><a href="{% url 'account:logout' %}">Logout</a></li>
+					{% else %}
+						<li><a href="{% url 'account:login' %}">Login</a></li>
+					{% endif %}
 				</ul>
 			</div>
 		</nav>

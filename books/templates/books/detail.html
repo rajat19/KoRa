@@ -16,9 +16,14 @@
 								{% elif book.logo %}
 									<img src="{{ book.logo }}" class="img responsive-img" style="height: 300px">
 								{% endif %}
-								<div>
-									<a class="btn red" href="{% url 'books:book-delete' book.id %}"><i class="fa fa-trash-o"></i></a>
-									<a class="btn green" href="{% url 'books:book-update' book.id %}"><i class="fa fa-edit"></i></a>
+								<div class="fixed-action-btn click-to-toggle horizontal">
+									<a class="btn-floating btn-large deep-orange">
+										<i class="material-icons">menu</i>
+									</a>
+									<ul>
+										<li><a class="btn-floating red" href="{% url 'books:book-delete' book.id %}"><i class="fa fa-trash-o"></i></a></li>
+										<li><a class="btn-floating green" href="{% url 'books:book-update' book.id %}"><i class="fa fa-edit"></i></a></li>
+									</ul>
 								</div>
 							</div>
 							<div class="col m8 s12">
@@ -67,6 +72,29 @@
 										{% endfor %}
 									</tbody>
 								</table>
+							</div>
+						</div>
+						<div class="red" style="height: 2px"></div>
+						<div class="row center">
+							<h5>Have you read this book ? Share your ideas on it</h5>
+							<a class="btn-floating green waves-effect waves-light" href="#review-modal"><span><i class="fa fa-comment"></i></span></a>
+
+							<div id="review-modal" class="modal">
+								<form action="" method="POST">
+									<div class="modal-content">
+										<h4>Review "{{book.title}}"</h4>
+
+											<div class="input-field col s12">
+												{% csrf_token %}
+												<textarea name="review" id="review" class="materialize-textarea" rows="8" cols="80"></textarea>
+												<label for="review">Start typing your beautiful comments......</label>
+											</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="waves-effect green waves-green btn btn-large">Save <span><i class="fa fa-check"></i></span></button>
+										<a href="#!" class="modal-action red modal-close waves-effect waves-green btn btn-large">Would write later on <span><i class="fa fa-times"></i></span></a>
+									</div>
+								</form>
 							</div>
 						</div>
 					</div>

@@ -63,7 +63,14 @@ class Upload(models.Model):
 class Search(models.Model):
 	searched_by = models.ForeignKey(User, on_delete=models.CASCADE)
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
-	date = models.DateTimeField(null=True)
+	searchedAt = models.DateTimeField(null=True)
 
 	class Meta:
 		verbose_name_plural = 'search'
+
+class Review(models.Model):
+	book = models.ForeignKey(Book, on_delete=models.CASCADE)
+	reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+	review = models.TextField(max_length=500)
+	createdAt = models.DateTimeField(null=True)
+	deletedAt = models.DateTimeField(null=True)
