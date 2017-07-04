@@ -35,10 +35,18 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'account.apps.AccountConfig',
+    'accounts.apps.AccountsConfig',
     'books.apps.BooksConfig',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.amazon',
+    # 'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.twitter'
 ]
 
 MIDDLEWARE = [
@@ -112,6 +120,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SOCIALACCOUNT_PROVIDERS = {
+    'facebook':{},
+    'google': {
+        'SCOPE': ['email'],
+        'AUTH_PARAMS': {'access_type': 'online'}
+    },
+    'twitter': {}
+}
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_USERNAME_REQUIRED = False
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
@@ -135,5 +163,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
-LOGIN_URL = 'account:login'
-LOGIN_REDIRECT_URL = 'account:profile'
+LOGIN_REDIRECT_URL = 'accounts:profile'
+SITE_ID = 1 #used in django allauth

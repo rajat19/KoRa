@@ -71,7 +71,7 @@
 			<li><a href="#">Series</a></li>
 			<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <span><i class="fa fa-angle-down"></i></span></a></li>
 			<li><a href="{% url 'books:upload' %}">Upload</a></li>
-			<li><a href="{% url 'account:logout' %}">Logout</a></li>
+			<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
 		</ul>
 
 		<nav class="deep-orange accent-1">
@@ -93,9 +93,9 @@
 					<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <i class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="{% url 'books:upload' %}">Upload</a></li>
 					{% if request.user.is_authenticated %}
-						<li><a href="{% url 'account:logout' %}">Logout</a></li>
+						<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
 					{% else %}
-						<li><a href="{% url 'account:login' %}">Login</a></li>
+						<li><a href="{% url 'accounts:login' %}">Login</a></li>
 					{% endif %}
 				</ul>
 			</div>

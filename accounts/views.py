@@ -7,11 +7,11 @@ from .forms import RegistrationForm
 from .models import Profile
 
 class IndexView(View):
-	template_name = 'account/index.html'
+	template_name = 'accounts/index.html'
 
 class RegisterView(View):
 	form_class = RegistrationForm
-	template_name = 'account/register.html'
+	template_name = 'accounts/register.html'
 
 	def get(self, request):
 		form = self.form_class(None)
@@ -33,16 +33,16 @@ class RegisterView(View):
 
 				if user.is_active:
 					login(request, user)
-					return redirect('account:profile-create')
+					return redirect('accounts:profile-create')
 
 		# if login fails
 		return render(request, self.template_name, {'form': form})
-		
+
 class ProfileCreate(CreateView):
 	model = Profile
 	fields = ['fullname', 'gender', 'birth_date', 'contact', 'organization', 'photo']
-	template_name = 'account/create_profile.html'
+	template_name = 'accounts/create_profile.html'
 
 class ProfileView(generic.ListView):
 	model = Profile
-	template_name= 'account/profile.html'
+	template_name= 'accounts/profile.html'

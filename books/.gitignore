@@ -1,2 +1,3 @@
 migrations/
 __pycach__/
+*.pyc
