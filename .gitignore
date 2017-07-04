@@ -50,3 +50,6 @@ Temporary Items
 __pycache__/*
 *.pyc
 media/
+
+# Database file
+*.sqlite3

@@ -5,10 +5,11 @@ from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
 urlpatterns = [
-	url(r'^$', TemplateView.as_view(template_name='account/index.html'), name='home'),
+	url(r'^$', TemplateView.as_view(template_name='accounts/index.html'), name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^books/', include('books.urls')),
+	url(r'^api/v1/', include('social_django.urls'), name="social")
 ]
 
 if settings.DEBUG:

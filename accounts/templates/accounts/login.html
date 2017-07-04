@@ -13,11 +13,28 @@
 							{% csrf_token %}
 							{% include 'books/form_template.html' %}
 							<div class="row">
-						    	<div class="input-field col s12">
+						    	<div class="input-field col s12 m4">
 						    		<button class="btn waves-effect waves-light green darken-5" type="submit">Login
-										<span><i class="fa fa-sign-in"></i></span>
-									</button>
+											<span><i class="fa fa-sign-in"></i></span>
+										</button>
 						    	</div>
+							</div>
+							or Try using one of these....
+							<div class="row">
+								<div class="input-field col s12 m3">
+									<a href="{% url 'social:begin' 'google-oauth2' %}" class="btn waves-effect waves-light red btn-large"> <span><i class="fa fa-google-plus"></i></span>
+									</a>
+								</div>
+								<div class="input-field col s12 m3">
+									<a href="#!" class="btn waves-effect waves-light blue darken-3 btn-large">
+										<span><i class="fa fa-facebook"></i></span>
+									</a>
+								</div>
+								<div class="input-field col s12 m3">
+									<a href="#!" class="btn waves-effect waves-light light-blue btn-large">
+										<span><i class="fa fa-twitter"></i></span>
+									</a>
+								</div>
 							</div>
 						</form>
 						Don't have an account! <a href="{% url 'accounts:register' %}">Register</a>
@@ -26,4 +43,7 @@
 			</div>
 		</div>
 	</section>
+{% endblock %}
+
+{% block script %}
 {% endblock %}
