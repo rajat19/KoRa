@@ -29,13 +29,13 @@ urlpatterns = [
 	url(r'^series/(?P<pk>[0-9]+)/$', views.SeriesView.as_view(), name="series"),
 
 	# /books/series/add
-	url(r'^series/add', views.SeriesCreate.as_view(), name="series-add"),
+	url(r'^series/add$', views.SeriesCreate.as_view(), name="series-add"),
 
 	# /books/series/2/delete
 	# url(r'^series/(?P<pk>[0-9]+)/delete/$', views.SeriesDelete.as_view(), name="series-delete"),
 
-	# search/harry potter
-	# url(r'^search/(?P<name>[a-zA-Z0-9 ]+)/$', views.SearchBook.as_view(), name="search"),
+	# search/
+	url(r'^search/$', views.SearchBook.as_view(), name="search"),
 
 	# /books/authors
 	url(r'^authors/$', views.AuthorsView.as_view(), name='authors'),
@@ -44,5 +44,5 @@ urlpatterns = [
 	url(r'^author/(?P<pk>[0-9]+)/$', views.AuthorView.as_view(), name="author"),
 
 	# /books/author/add
-	url(r'^author/add', views.AuthorCreate.as_view(), name="author-add"),
+	url(r'^author/add$', views.AuthorCreate.as_view(), name="author-add"),
 ]

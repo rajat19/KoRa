@@ -74,6 +74,12 @@ class SeriesCreate(CreateView):
 
 class SearchBook(View):
 	model = Search
+	template_name = 'books/result.html'
+
+	def get(self, request):
+		print(request.POST)
+		# searched = Book.objects.get(title__contains='')
+		return render(request, self.template_name)
 
 	def post(self, request):
 		pass

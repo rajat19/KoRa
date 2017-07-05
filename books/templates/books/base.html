@@ -59,7 +59,7 @@
 			</ul>
 
 			<li>
-				<form action="" method="GET">
+				<form action="{% url 'books:search' %}" method="GET">
 					<div class="input-field col s4">
 						<input type="text" name="search" id="search" placeholder="Search Books...">
 						<button class="btn deep-orange" type="submit">Search</button>
@@ -80,7 +80,7 @@
 				<a href="#" data-activates="mobili" class="button-collapse"><span><i class="fa fa-reorder"></i></span></a>
 				<ul id="deski" class="right hide-on-med-and-down" style="padding-right: 10px;">
 					<li>
-						<form action="" method="GET">
+						<form action="{% url 'books:search' %}" method="GET">
 							<div class="input-field col s8">
 								<input type="search" name="search" id="search-nav">
 								<label class="label-icon" for="search"><i class="material-icons">search</i></label>
