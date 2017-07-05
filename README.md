@@ -1,5 +1,4 @@
 # KORA KAGAZ
-============================
 KoRa Kagaz is a book sharing app designed using django framework of python
 
 ## Requirements

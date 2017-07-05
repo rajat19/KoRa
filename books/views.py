@@ -29,8 +29,8 @@ class BookCreate(CreateView):
 
 @method_decorator(login_required, name="dispatch")
 class BookUpdate(UpdateView):
-	model = Book
-	fields = ['series', 'title', 'author', 'language', 'genre', 'synopsis', 'logo_file']
+	form_class = BookForm
+	template_name = 'books/book_form.html'
 
 @method_decorator(login_required, name="dispatch")
 class BookDelete(DeleteView):
@@ -55,6 +55,13 @@ class BookUpload(View):
 			upload.save()
 
 		return render(request, self.template_name, {'form': form})
+
+class SeriesList(generic.ListView):
+	template_name = 'books/series_list.html'
+	context_object_name = 'all_series'
+
+	def get_queryset(self):
+		return Series.objects.all().order_by('title')
 
 class SeriesView(generic.DetailView):
 	model = Series

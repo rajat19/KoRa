@@ -19,8 +19,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SECURITY WARNING: keep these settings in production secret!
 SECRET_KEY = 'i)shwc38w&ma8dwvuf)-6x6&$*j^z@8l6r69kr=wd3w557o&v5'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '283740368654-peskahtgu6fnoqg2tfp211khi4h59n2o.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'QzEWSLvprb0dzWKR4PyNZz6Y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -120,9 +122,6 @@ AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend'
 )
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '283740368654-peskahtgu6fnoqg2tfp211khi4h59n2o.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'QzEWSLvprb0dzWKR4PyNZz6Y'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

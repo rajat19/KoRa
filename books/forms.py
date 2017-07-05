@@ -11,7 +11,7 @@ class BookForm(forms.ModelForm):
 
 	class Meta:
 		model = Book
-		fields = ['series', 'author', 'title', 'genre', 'logo_file']
+		fields = ['series', 'author', 'title', 'genre', 'synopsis', 'logo_file']
 
 class UploadForm(forms.ModelForm):
 	fields = ['book', 'file']
