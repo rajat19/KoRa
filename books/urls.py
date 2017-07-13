@@ -35,7 +35,7 @@ urlpatterns = [
 	# url(r'^series/(?P<pk>[0-9]+)/delete/$', views.SeriesDelete.as_view(), name="series-delete"),
 
 	# search/
-	url(r'^search/$', views.SearchBook.as_view(), name="search"),
+	url(r'^search/$', views.SearchEverything.as_view(), name="search"),
 
 	# /books/authors
 	url(r'^authors/$', views.AuthorsView.as_view(), name='authors'),
@@ -45,4 +45,7 @@ urlpatterns = [
 
 	# /books/author/add
 	url(r'^author/add$', views.AuthorCreate.as_view(), name="author-add"),
+
+	# /books/1/review/add
+	url(r'^(?P<pk>[0-9]+)/review/add/$', views.ReviewCreate.as_view(), name='review-add'),
 ]

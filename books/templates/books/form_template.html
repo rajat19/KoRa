@@ -11,6 +11,14 @@
 					<input class="file-path validate" type="text">
 				</div>
 			</div>
+		{% elif field|fieldtype == 'Textarea' %}
+			<div class="input-field col s12">
+				<span class="red-text">
+					{{ field.errors }}
+				</span>
+				<textarea name="{{ field.name }}" id="" cols="30" rows="10" class="materialize-textarea"></textarea>
+				{{ field.label_tag }}
+			</div>
 		{% else %}
 			<div class="input-field col s12">
 				<span class="red-text">

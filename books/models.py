@@ -35,7 +35,7 @@ class Book(models.Model):
 	language = models.CharField(max_length=100, blank=True, null=True)
 	genre = models.CharField(max_length=200)
 	series = models.ForeignKey(Series, null=True, blank=True, default='')
-	synopsis = models.TextField(max_length=500)
+	synopsis = models.TextField(max_length=1000)
 	year = models.CharField(null=True, blank=True, max_length=4)
 	logo = models.CharField(max_length=300, blank=True)
 	logo_file = models.FileField(blank=True)
@@ -71,6 +71,6 @@ class Search(models.Model):
 class Review(models.Model):
 	book = models.ForeignKey(Book, on_delete=models.CASCADE)
 	reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
-	review = models.TextField(max_length=500)
+	review = models.TextField(max_length=1000)
 	createdAt = models.DateTimeField(null=True)
 	deletedAt = models.DateTimeField(null=True)

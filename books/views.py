@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-from .models import Book, Series, Search, Upload, Author
-from .forms import BookForm, UploadForm
+from .models import Book, Series, Search, Upload, Author, Review
+from .forms import BookForm, UploadForm, ReviewForm
 
 decorators = [login_required]
 
@@ -29,8 +29,9 @@ class BookCreate(CreateView):
 
 @method_decorator(login_required, name="dispatch")
 class BookUpdate(UpdateView):
-	form_class = BookForm
-	template_name = 'books/book_form.html'
+	model = Book
+	template_name = 'books/book_update_form.html'
+	fields = ['series', 'title', 'author', 'language', 'genre', 'synopsis', 'logo_file']
 
 @method_decorator(login_required, name="dispatch")
 class BookDelete(DeleteView):
@@ -72,17 +73,18 @@ class SeriesCreate(CreateView):
 	model = Series
 	fields = ['title', 'no_of_books']
 
-class SearchBook(View):
-	model = Search
+class SearchEverything(generic.ListView):
 	template_name = 'books/result.html'
+	context_object_name = 'all_data'
 
-	def get(self, request):
-		print(request.POST)
-		# searched = Book.objects.get(title__contains='')
-		return render(request, self.template_name)
-
-	def post(self, request):
-		pass
+	def get_queryset(self):
+		searchString = self.request.GET.get('search') or '-created'
+		# queryString = super(SearchEverything, self).get_queryset()
+		books = Book.objects.filter(title__contains=searchString)
+		authors = Author.objects.filter(name__contains=searchString)
+		series = Series.objects.filter(title__contains=searchString)
+		data = {'book': books, 'author': authors, 'series': series}
+		return data
 
 class AuthorsView(generic.ListView):
 	template_name = 'books/authors.html'
@@ -99,3 +101,20 @@ class AuthorView(generic.DetailView):
 class AuthorCreate(CreateView):
 	model = Author
 	fields = ['name', 'country']
+
+@method_decorator(login_required, name='dispatch')
+class ReviewCreate(View):
+	form_class = ReviewForm
+	template_name = 'books/detail.html'
+
+	def post(self, request, pk):
+		form = self.form_class(request.POST)
+		print (pk, form)
+
+		if form.is_valid():
+			review = form.save(commit=False)
+			review.reviewer = request.user
+			review.book = self.kwargs('pk')
+			review.save()
+
+		return render(request, self.template_name, {'book': pk})

@@ -1,4 +1,4 @@
-from .models import Book, Series, Author, Upload
+from .models import Book, Series, Author, Upload, Review
 from django import forms, template
 
 class BookForm(forms.ModelForm):
@@ -23,3 +23,9 @@ class UploadForm(forms.ModelForm):
 	class Meta:
 		model = Upload
 		fields = ['book', 'file']
+
+class ReviewForm(forms.ModelForm):
+
+	class Meta:
+		model = Review
+		fields = ['book', 'reviewer', 'review', 'createdAt', 'deletedAt']
