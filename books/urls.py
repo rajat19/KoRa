@@ -16,6 +16,9 @@ urlpatterns = [
 	# /books/upload/
 	url(r'^upload/$', views.BookUpload.as_view(), name='upload'),
 
+	# /books/1/review/add
+	url(r'^review/add/$', views.ReviewCreate.as_view(), name='review-add'),
+
 	# /books/2/update
 	url(r'^(?P<pk>[0-9]+)/update/$', views.BookUpdate.as_view(), name='book-update'),
 
@@ -45,7 +48,4 @@ urlpatterns = [
 
 	# /books/author/add
 	url(r'^author/add$', views.AuthorCreate.as_view(), name="author-add"),
-
-	# /books/1/review/add
-	url(r'^(?P<pk>[0-9]+)/review/add/$', views.ReviewCreate.as_view(), name='review-add'),
 ]

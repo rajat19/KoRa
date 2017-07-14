@@ -107,14 +107,22 @@ class ReviewCreate(View):
 	form_class = ReviewForm
 	template_name = 'books/detail.html'
 
-	def post(self, request, pk):
+	def get(self, request):
+		pass
+
+	def post(self, request):
 		form = self.form_class(request.POST)
-		print (pk, form)
 
 		if form.is_valid():
 			review = form.save(commit=False)
 			review.reviewer = request.user
-			review.book = self.kwargs('pk')
+			review.book = form.cleaned_data['book']
+			print(review)
 			review.save()
 
-		return render(request, self.template_name, {'book': pk})
+		else:
+			print(request.user)
+			print('error in form')
+			return render(request, 'books/test.html', {'errors': form.errors})
+
+		return redirect('books:detail', pk=form.cleaned_data['book'].id)

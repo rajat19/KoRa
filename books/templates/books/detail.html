@@ -3,6 +3,8 @@
 {% block title %}{{ book.title }}{% endblock %}
 
 {% block body %}
+{% load staticfiles %}
+{% load book_extras %}
 	<section>
 		<div class="row">
 			<div class="col m10 s12 offset-m1">
@@ -23,6 +25,7 @@
 									<ul>
 										<li><a class="btn-floating red" href="{% url 'books:book-delete' book.id %}"><i class="fa fa-trash-o"></i></a></li>
 										<li><a class="btn-floating green" href="{% url 'books:book-update' book.id %}"><i class="fa fa-edit"></i></a></li>
+										<li><a class="btn-floating blue" href="{% url 'books:upload' %}"><i class="fa fa-upload"></i></a></li>
 									</ul>
 								</div>
 							</div>
@@ -76,29 +79,43 @@
 						</div>
 
 						<!-- /Review Modal -->
+						{% define 'no' as reviewed %}
 						<div class="red" style="height: 2px"></div>
-						<div class="row center">
-							<h5>Reviews</h5>
+						<div class="row">
+							<h5 class="center">Reviews</h5>
+							<ul class="collection">
 							{% for review in book.review_set.all %}
-								{{ review }}
+								<li class="collection-item avatar transparent">
+								 {% if review.reviewer.photo %}
+								 	<img src="{{ review.reviwer.photo }}" alt="" class="circle">
+								 {% else %}
+								 	<img src="{% static 'books/images/a3.jpg' %}" alt="" class="circle">
+									<i class="fa fa-book circle blue"></i>
+								 {% endif %}
+									<span class="title">{{ review.reviewer }}</span>
+									<p>{{ review }} </p>
+									<p class="secondary-content">Written At: {{review.createdAt}}</p>
+								</li>
 							{% empty %}
 								No reviews yet
 							{% endfor %}
+							</ul>
 						</div>
+						<!-- Reviews -->
 						<div class="row center">
-							{% if request.user in book.review.user_set.all %}
-								<!-- Reviews -->
+							{% if reviewed == 'yes' %}
 								You have already reviewed the book
 							{% else %}
 							<h5>Have you read this book ? Share your ideas on it</h5>
 							<a class="btn-floating green waves-effect waves-light" href="#review-modal"><span><i class="fa fa-comment"></i></span></a>
 
 							<div id="review-modal" class="modal">
-								<form action="{% url 'books:review-add' book.id %}" method="POST">
+								<form action="{% url 'books:review-add'%}" method="POST">
 									<div class="modal-content">
 										<h4>Review "{{book.title}}"</h4>
 											<div class="input-field col s12">
 												{% csrf_token %}
+												<input type="hidden" value="{{book.id}}" name="book">
 												<textarea name="review" id="review" class="materialize-textarea" rows="8" cols="80"></textarea>
 												<label for="review">Start typing your beautiful comments......</label>
 											</div>
