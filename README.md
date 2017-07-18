@@ -10,5 +10,6 @@ Requirements are provided in the requirements.txt file
 3. Share if any book found interesting
 4. Listings of book available by Authors' details
 5. Search options available
+6. Add Reviews to the book you read
 
 More details would be provided at later stages of the project.....

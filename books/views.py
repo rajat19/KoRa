@@ -83,7 +83,7 @@ class SearchEverything(generic.ListView):
 		books = Book.objects.filter(title__contains=searchString)
 		authors = Author.objects.filter(name__contains=searchString)
 		series = Series.objects.filter(title__contains=searchString)
-		data = {'book': books, 'author': authors, 'series': series}
+		data = {'books': books, 'authors': authors, 'series': series, 'search_text': searchString}
 		return data
 
 class AuthorsView(generic.ListView):

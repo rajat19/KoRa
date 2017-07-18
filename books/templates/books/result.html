@@ -1,14 +1,82 @@
-<h3>Books:</h3>
-{% for data in all_data.books %}
-	{{data}}
-{% endfor %}
+{% extends 'books/base.html' %}
 
-<h3>Authors:</h3>
-{% for data in all_data.author %}
-	{{data}}
-{% endfor %}
+{% block title %}Search Results{% endblock %}
 
-<h3>Series:</h3>
-{% for data in all_data.series %}
-	{{data}}
-{% endfor %}
+{% block body %}
+	<section>
+		<div class="row">
+			<div class="col s12">
+				<div class="card z-depth-5">
+					<div class="card-content blue-grey lighten-4">
+						<span class="card-title center">Search Results for "{{ all_data.search_text }}" </span>
+						<div class="row">
+							<ul class="tabs">
+								<li class="tab col s4"><a href="#books">Books</a></li>
+								<li class="tab col s4"><a href="#authors">Authors</a></li>
+								<li class="tab col s4"><a href="#series">Series</a></li>
+							</ul>
+							<div id="books" class="col s12 deep-purple lighten-3">
+								{% if not all_data.books %}
+									<h5 class="red-text">No Books with given name</h5>
+								{% else %}
+									<ul class="collection">
+										{% for book in all_data.books %}
+											<a href="{% url 'books:detail' book.id %}">
+												<li class="collection-item transparent avatar">
+													{% if book.logo_file %}
+														<img src="{{ book.logo_file.url }}" class="img responsive-img imgsqr">
+													{% elif book.logo %}
+														<img src="{{ book.logo }}" class="img responsive-img imgsqr">
+													{% endif %}
+													<h5 style="margin-left: 30px;">Book: {{ book }}</h5>
+													<h5 style="margin-left: 30px;">Author: {{ book.author }}</h5>
+												</li>
+											</a>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</div>
+							<div id="authors" class="col s12 yellow">
+								{% if not all_data.authors %}
+									<h5 class="red-text">No Author with given name</h5>
+								{% else %}
+									<ul class="collection">
+										{% for author in all_data.authors %}
+											<a href="{% url 'books:detail' book.id %}">
+												<li class="collection-item transparent avatar">
+													<h5 style="margin-left: 30px;">Author: {{ author }}</h5>
+													<h5 style="margin-left: 30px;">Author: {{ author }}</h5>
+												</li>
+											</a>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</div>
+							<div id="series" class="col s12 green lighten-3">
+								{% if not all_data.books %}
+									<h5 class="red-text">No Books with given name</h5>
+								{% else %}
+									<ul class="collection">
+										{% for book in all_data.books %}
+											<a href="{% url 'books:detail' book.id %}">
+												<li class="collection-item transparent avatar">
+													{% if book.logo_file %}
+														<img src="{{ book.logo_file.url }}" class="img responsive-img imgsqr">
+													{% elif book.logo %}
+														<img src="{{ book.logo }}" class="img responsive-img imgsqr">
+													{% endif %}
+													<h5 style="margin-left: 30px;">Book: {{ book }}</h5>
+													<h5 style="margin-left: 30px;">Author: {{ book.author }}</h5>
+												</li>
+											</a>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

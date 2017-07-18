@@ -4,10 +4,11 @@ $(document).ready(function() {
 	$('#sidenav-overlay').remove();
 	$('select').material_select();
 	$('.modal').modal({
-		dismissible: true, 
-		opacity: .5,  
+		dismissible: true,
+		opacity: .5,
 	});
 	$('.materialize-textarea').trigger('autoresize');
+	$('.ul.tabs').tabs();
 	// $('.datepicker').pickadate({
 	// 	selectMonths: true,
 	// 	selectYears: 15,
@@ -30,7 +31,7 @@ $(document).ready(function() {
 	// 	lastPage:  3,
 	// 	firstPage:  1,
 	// 	useUrlParameter: true,
-	// }); 
+	// });
 
 	// $('#pagination-long').materializePagination({
 	// 	align: 'center',
