@@ -62,8 +62,8 @@ class Upload(models.Model):
 		return extension
 
 class Search(models.Model):
-	searched_by = models.ForeignKey(User, on_delete=models.CASCADE)
-	book = models.ForeignKey(Book, on_delete=models.CASCADE)
+	searchedBy = models.ForeignKey(User, on_delete=models.CASCADE)
+	query = models.CharField(max_length=50)
 	searchedAt = models.DateTimeField(null=True)
 
 	class Meta:

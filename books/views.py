@@ -76,10 +76,13 @@ class SeriesCreate(CreateView):
 class SearchEverything(generic.ListView):
 	template_name = 'books/result.html'
 	context_object_name = 'all_data'
+	form_class = 'SearchForm'
+
+	def get(self):
+		searchString = self.request.GET.get('search') or '-created'
 
 	def get_queryset(self):
 		searchString = self.request.GET.get('search') or '-created'
-		# queryString = super(SearchEverything, self).get_queryset()
 		books = Book.objects.filter(title__contains=searchString)
 		authors = Author.objects.filter(name__contains=searchString)
 		series = Series.objects.filter(title__contains=searchString)
