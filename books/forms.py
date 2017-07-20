@@ -1,4 +1,4 @@
-from .models import Book, Series, Author, Upload, Review
+from .models import Book, Series, Author, Upload, Review, Search
 from django import forms, template
 
 class BookForm(forms.ModelForm):
@@ -29,3 +29,9 @@ class ReviewForm(forms.ModelForm):
 	class Meta:
 		model = Review
 		fields = ['book', 'reviewer', 'review', 'createdAt', 'deletedAt']
+
+class SearchForm(forms.ModelForm):
+
+	class Meta:
+		model = Search
+		fields = ['searchedBy', 'query', 'searchedAt']
