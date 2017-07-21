@@ -34,4 +34,4 @@ class SearchForm(forms.ModelForm):
 
 	class Meta:
 		model = Search
-		fields = ['searchedBy', 'query', 'searchedAt']
+		fields = ['query']

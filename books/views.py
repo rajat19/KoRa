@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.utils.timezone import utc
 from django.views.generic import View
 from .models import Book, Series, Search, Upload, Author, Review
 from .forms import BookForm, UploadForm, ReviewForm
@@ -78,19 +79,29 @@ class SearchEverything(generic.ListView):
 	context_object_name = 'all_data'
 	form_class = 'SearchForm'
 
-	def get_queryset(self):
-		searchString = self.request.GET.get('search') or '-created'
+	def get(self, request):
+		form = self.form_class(None)
+		return render(request, self.template_name, {'form': form})
+
+	def post(self, request):
+		searchString = request.POST['query']
+		print(request.user)
+		print(request.POST)
 		if(request.user):
-			form = self.form_class(None)
-			searchItem = form.save(commit.false)
-			searchItem.query = searchString
-			searchItem.searchedBy = request.user
-			# todo
+			form = self.form_class(request.POST)
+
+			if form.is_valid():
+				searchItem = form.save(commit=false)
+				searchItem.searchedBy = request.user
+				searchItem.searchedAt = datetime.datetime.utcnow().replace(tzinfo=utc)
+				searchItem.save()
+
 		books = Book.objects.filter(title__contains=searchString)
 		authors = Author.objects.filter(name__contains=searchString)
 		series = Series.objects.filter(title__contains=searchString)
 		data = {'books': books, 'authors': authors, 'series': series, 'search_text': searchString}
-		return data
+
+		return render(request, self.template_name, {'data': data})
 
 class AuthorsView(generic.ListView):
 	template_name = 'books/authors.html'
