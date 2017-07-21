@@ -34,4 +34,8 @@ class SearchForm(forms.ModelForm):
 
 	class Meta:
 		model = Search
+<<<<<<< HEAD
 		fields = ['query']
+=======
+		fields = ['searchedBy', 'query', 'searchedAt']
+>>>>>>> c9f163058a01e5b7edfb4370281405363a6b1c48
