@@ -63,11 +63,7 @@ class Upload(models.Model):
 
 class Search(models.Model):
 	searchedBy = models.ForeignKey(User, on_delete=models.CASCADE)
-<<<<<<< HEAD
 	query = models.CharField(max_length=50, default='')
-=======
-	query = models.CharField(max_length=50)
->>>>>>> c9f163058a01e5b7edfb4370281405363a6b1c48
 	searchedAt = models.DateTimeField(null=True)
 
 	class Meta:

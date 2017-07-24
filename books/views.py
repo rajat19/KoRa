@@ -79,7 +79,6 @@ class SearchEverything(generic.ListView):
 	context_object_name = 'all_data'
 	form_class = 'SearchForm'
 
-<<<<<<< HEAD
 	def get(self, request):
 		form = self.form_class(None)
 		return render(request, self.template_name, {'form': form})
@@ -97,13 +96,6 @@ class SearchEverything(generic.ListView):
 				searchItem.searchedAt = datetime.datetime.utcnow().replace(tzinfo=utc)
 				searchItem.save()
 
-=======
-	def get(self):
-		searchString = self.request.GET.get('search') or '-created'
-
-	def get_queryset(self):
-		searchString = self.request.GET.get('search') or '-created'
->>>>>>> c9f163058a01e5b7edfb4370281405363a6b1c48
 		books = Book.objects.filter(title__contains=searchString)
 		authors = Author.objects.filter(name__contains=searchString)
 		series = Series.objects.filter(title__contains=searchString)
