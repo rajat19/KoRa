@@ -26,12 +26,12 @@
 									</a>
 								</div>
 								<div class="input-field col s12 m3">
-									<a href="#!" class="btn waves-effect waves-light blue darken-3 btn-large">
+									<a href="#!" class="later btn waves-effect waves-light blue darken-3 btn-large">
 										<span><i class="fa fa-facebook"></i></span>
 									</a>
 								</div>
 								<div class="input-field col s12 m3">
-									<a href="#!" class="btn waves-effect waves-light light-blue btn-large">
+									<a href="#!" class="later btn waves-effect waves-light light-blue btn-large">
 										<span><i class="fa fa-twitter"></i></span>
 									</a>
 								</div>
@@ -43,4 +43,12 @@
 			</div>
 		</div>
 	</section>
+{% endblock %}
+
+{% block script %}
+<script>
+	$('.later').click(function() {
+		Materialize.toast('The feature would be added soon!', 3000, 'rounded');
+	});
+</script>
 {% endblock %}

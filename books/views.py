@@ -77,31 +77,14 @@ class SeriesCreate(CreateView):
 class SearchEverything(generic.ListView):
 	template_name = 'books/result.html'
 	context_object_name = 'all_data'
-	form_class = 'SearchForm'
-
-	def get(self, request):
-		form = self.form_class(None)
-		return render(request, self.template_name, {'form': form})
-
-	def post(self, request):
-		searchString = request.POST['query']
-		print(request.user)
-		print(request.POST)
-		if(request.user):
-			form = self.form_class(request.POST)
-
-			if form.is_valid():
-				searchItem = form.save(commit=false)
-				searchItem.searchedBy = request.user
-				searchItem.searchedAt = datetime.datetime.utcnow().replace(tzinfo=utc)
-				searchItem.save()
-
+	def get_queryset(self):
+		searchString = self.request.GET.get('search') or '-created'
+		# queryString = super(SearchEverything, self).get_queryset()
 		books = Book.objects.filter(title__contains=searchString)
 		authors = Author.objects.filter(name__contains=searchString)
 		series = Series.objects.filter(title__contains=searchString)
 		data = {'books': books, 'authors': authors, 'series': series, 'search_text': searchString}
-
-		return render(request, self.template_name, {'data': data})
+		return data
 
 class AuthorsView(generic.ListView):
 	template_name = 'books/authors.html'

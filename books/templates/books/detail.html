@@ -107,25 +107,29 @@
 								You have already reviewed the book
 							{% else %}
 							<h5>Have you read this book ? Share your ideas on it</h5>
-							<a class="btn-floating green waves-effect waves-light" href="#review-modal"><span><i class="fa fa-comment"></i></span></a>
+								{% if request.user.is_active %}
+									<a class="btn-floating green waves-effect waves-light" href="#review-modal"><span><i class="fa fa-comment"></i></span></a>
 
-							<div id="review-modal" class="modal">
-								<form action="{% url 'books:review-add'%}" method="POST">
-									<div class="modal-content">
-										<h4>Review "{{book.title}}"</h4>
-											<div class="input-field col s12">
-												{% csrf_token %}
-												<input type="hidden" value="{{book.id}}" name="book">
-												<textarea name="review" id="review" class="materialize-textarea" rows="8" cols="80"></textarea>
-												<label for="review">Start typing your beautiful comments......</label>
+									<div id="review-modal" class="modal">
+										<form action="{% url 'books:review-add'%}" method="POST">
+											<div class="modal-content">
+												<h4>Review "{{book.title}}"</h4>
+													<div class="input-field col s12">
+														{% csrf_token %}
+														<input type="hidden" value="{{book.id}}" name="book">
+														<textarea name="review" id="review" class="materialize-textarea" rows="8" cols="80"></textarea>
+														<label for="review">Start typing your beautiful comments......</label>
+													</div>
 											</div>
+											<div class="modal-footer">
+												<button type="submit" class="waves-effect green waves-green btn btn-large">Save <span><i class="fa fa-check"></i></span></button>
+												<a href="#!" class="modal-action red modal-close waves-effect waves-green btn btn-large">Would write later on <span><i class="fa fa-times"></i></span></a>
+											</div>
+										</form>
 									</div>
-									<div class="modal-footer">
-										<button type="submit" class="waves-effect green waves-green btn btn-large">Save <span><i class="fa fa-check"></i></span></button>
-										<a href="#!" class="modal-action red modal-close waves-effect waves-green btn btn-large">Would write later on <span><i class="fa fa-times"></i></span></a>
-									</div>
-								</form>
-							</div>
+								{% else %}
+									<a href="{% url 'accounts:login' %}" class="btn red">Login to start writing reviews !</a>
+								{% endif %}
 							{% endif %}
 						</div>
 						<!-- ./Review Modal -->

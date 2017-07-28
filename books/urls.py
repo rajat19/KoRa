@@ -26,7 +26,7 @@ urlpatterns = [
 	url(r'^(?P<pk>[0-9]+)/delete/$', views.BookDelete.as_view(), name='book-delete'),
 
 	# /books/series/list
-	url(r'^series/list$', views.SeriesList.as_view(), name="series_list"),
+	url(r'^series/list$', views.SeriesList.as_view(), name="series-list"),
 
 	# /books/series/2
 	url(r'^series/(?P<pk>[0-9]+)/$', views.SeriesView.as_view(), name="series"),
