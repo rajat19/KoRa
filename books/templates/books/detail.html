@@ -23,8 +23,10 @@
 										<i class="material-icons">menu</i>
 									</a>
 									<ul>
+										{% if request.user.is_superuser %}
 										<li><a class="btn-floating red" href="{% url 'books:book-delete' book.id %}"><i class="fa fa-trash-o"></i></a></li>
 										<li><a class="btn-floating green" href="{% url 'books:book-update' book.id %}"><i class="fa fa-edit"></i></a></li>
+										{% endif %}
 										<li><a class="btn-floating blue" href="{% url 'books:upload' %}"><i class="fa fa-upload"></i></a></li>
 									</ul>
 								</div>
