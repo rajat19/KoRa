@@ -9,7 +9,7 @@ Requirements are provided in the requirements.txt file
 2. Upload Book in different formats
 3. Share if any book found interesting
 4. Listings of book available by Authors' details
-5. Search options available
-6. Add Reviews to the book you read
+5. Search books, authors, series available
+6. Add Reviews to tonnes of book you read
 
-More details would be provided at later stages of the project.....
+Help us Grow and we would provide more benefits in the field of books. Have fun reading

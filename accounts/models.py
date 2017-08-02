@@ -11,6 +11,7 @@ class Profile(models.Model):
 	contact = models.CharField(max_length=10, null=True, blank=True)
 	photo = models.FileField(blank=True, null=True)
 	organization = models.CharField(max_length=100, blank=True, default='')
+	profile_created = models.IntegerField(blank=True, default=0)
 
 	def __str__(self):
 		return self.user.username

@@ -46,6 +46,11 @@
 			<li><a href="{% url 'books:index' %}">All</a></li>
 			<li><a href="{% url 'books:authors' %}">By Authors</a></li>
 		</ul>
+		<ul class="dropdown-content deep-orange darken-2" id="dropdown-account">
+			<li><a href="{% url 'accounts:profile' %}">Profile <span><i class="fa fa-user"></i></span></a></li>
+			<li><a href="#!">Settings</a></li>
+			<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+		</ul>
 
 		<ul class="side-nav deep-orange darken-2" id="mobili">
 			<ul class="dropdown-content deep-orange darken-2" id="dropdown-add">
@@ -56,6 +61,11 @@
 			<ul class="dropdown-content deep-orange darken-2" id="dropdown-book">
 				<li><a href="{% url 'books:index' %}">All</a></li>
 				<li><a href="{% url 'books:authors' %}">By Authors</a></li>
+			</ul>
+			<ul class="dropdown-content deep-orange darken-2" id="dropdown-account">
+				<li><a href="{% url 'accounts:profile' %}">Profile <span><i class="fa fa-user fa-fw"></i></span></a></li>
+				<li><a href="#!">Settings <span><i class="fa fa-cog fa-fw"></i></span></a></li>
+				<li><a href="{% url 'accounts:logout' %}">Logout <span><i class="fa fa-sign-out fa-fw"></i></span></a></li>
 			</ul>
 
 			<li>
@@ -71,7 +81,13 @@
 			<li><a href="{% url 'books:series-list' %}">Series</a></li>
 			<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <span><i class="fa fa-angle-down"></i></span></a></li>
 			<li><a href="{% url 'books:upload' %}">Upload</a></li>
-			<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+			{% if request.user.is_authenticated %}
+			<li>
+				<a href="#!" class="dropdown-button" data-activates="dropdown-account">Hi, {{ request.user }} <i class="material-icons right">arrow_drop_down</i></a>
+			</li>
+			{% else %}
+				<li><a href="{% url 'accounts:login' %}">Login</a></li>
+			{% endif %}
 		</ul>
 
 		<nav class="deep-orange accent-1">
@@ -93,9 +109,11 @@
 					<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <i class="material-icons right">arrow_drop_down</i></a></li>
 					<li><a href="{% url 'books:upload' %}">Upload</a></li>
 					{% if request.user.is_authenticated %}
-						<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+					<li>
+						<a href="#!" class="dropdown-button" data-activates="dropdown-account">Hi, {{ request.user }} <i class="material-icons right">arrow_drop_down</i></a>
+					</li>
 					{% else %}
-						<li><a href="{% url 'accounts:login' %}">Login</a></li>
+					<li><a href="{% url 'accounts:login' %}">Login</a></li>
 					{% endif %}
 				</ul>
 			</div>
