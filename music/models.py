@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django.utils.text import slugify
 
 class Artist(models.Model):
 	slug = models.SlugField(max_length=40, unique=True)
