@@ -28,7 +28,7 @@ class ReviewForm(forms.ModelForm):
 
 	class Meta:
 		model = Review
-		fields = ['book', 'reviewer', 'review', 'createdAt', 'deletedAt']
+		fields = ['book', 'reviewer', 'review']
 
 class SearchForm(forms.ModelForm):
 

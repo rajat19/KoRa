@@ -16,7 +16,7 @@ urlpatterns = [
 	# /books/upload/
 	url(r'^upload/$', views.BookUpload.as_view(), name='upload'),
 
-	# /books/1/review/add
+	# /books/review/add
 	url(r'^review/add/$', views.ReviewCreate.as_view(), name='review-add'),
 
 	# /books/2/update
