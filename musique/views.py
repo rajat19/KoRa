@@ -16,12 +16,14 @@ class IndexView(generic.ListView):
     template_name = 'musique/index.html'
     context_object_name = 'all_songs'
 
+    # TODO: Display Album/Artist also on index page -> See Gaana.com for reference
+    # TODO: Add a song list page
     def get_queryset(self):
         return Song.objects.all().order_by('name')
 
 class SongView(generic.DetailView):
     model = Song
-    template_name = 'musique/detail.html'
+    template_name = 'musique/song.html'
 
 @method_decorator(login_required, name="dispatch")
 class SongCreate(CreateView):
@@ -61,7 +63,7 @@ class SongUpload(View):
 @method_decorator(login_required, name='dispatch')
 class ReviewCreate(View):
 	form_class = ReviewForm
-	template_name = 'musique/detail.html'
+	template_name = 'musique/song.html'
 
 	def get(self, request):
 		pass
