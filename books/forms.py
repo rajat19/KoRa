@@ -1,4 +1,4 @@
-from .models import Book, Series, Author, Upload, Review, Search
+from .models import Book, BookUpload, BookReview, BookSearch
 from django import forms, template
 
 class BookForm(forms.ModelForm):
@@ -21,17 +21,17 @@ class UploadForm(forms.ModelForm):
 		self.fields['book'].empty_label = ''
 
 	class Meta:
-		model = Upload
+		model = BookUpload
 		fields = ['book', 'file']
 
 class ReviewForm(forms.ModelForm):
 
 	class Meta:
-		model = Review
+		model = BookReview
 		fields = ['book', 'reviewer', 'review']
 
 class SearchForm(forms.ModelForm):
 
 	class Meta:
-		model = Search
+		model = BookSearch
 		fields = ['query']

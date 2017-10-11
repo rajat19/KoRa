@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.utils.timezone import utc
 from django.views.generic import View
-from .models import Book, Series, Search, Upload, Author, Review
+from .models import Book, BookSeries, BookSearch, BookUpload, BookAuthor, BookReview
 from .forms import BookForm, UploadForm, ReviewForm
 
 decorators = [login_required]
@@ -63,15 +63,15 @@ class SeriesList(generic.ListView):
 	context_object_name = 'all_series'
 
 	def get_queryset(self):
-		return Series.objects.all().order_by('title')
+		return BookSeries.objects.all().order_by('title')
 
 class SeriesView(generic.DetailView):
-	model = Series
+	model = BookSeries
 	template_name = 'books/series.html'
 
 @method_decorator(login_required, name="dispatch")
 class SeriesCreate(CreateView):
-	model = Series
+	model = BookSeries
 	fields = ['title', 'no_of_books']
 
 class SearchEverything(generic.ListView):
@@ -81,9 +81,14 @@ class SearchEverything(generic.ListView):
 		searchString = self.request.GET.get('search') or '-created'
 		# queryString = super(SearchEverything, self).get_queryset()
 		books = Book.objects.filter(title__contains=searchString)
-		authors = Author.objects.filter(name__contains=searchString)
-		series = Series.objects.filter(title__contains=searchString)
-		data = {'books': books, 'authors': authors, 'series': series, 'search_text': searchString}
+		authors = BookAuthor.objects.filter(name__contains=searchString)
+		series = BookSeries.objects.filter(title__contains=searchString)
+		data = {
+			'books': books,
+			'authors': authors,
+			'series': series,
+			'search_text': searchString
+		}
 		return data
 
 class AuthorsView(generic.ListView):
@@ -91,15 +96,15 @@ class AuthorsView(generic.ListView):
 	context_object_name = 'all_authors'
 
 	def get_queryset(self):
-		return Author.objects.all().order_by('name')
+		return BookAuthor.objects.all().order_by('name')
 
 class AuthorView(generic.DetailView):
-	model = Author
+	model = BookAuthor
 	template_name = 'books/author.html'
 
 @method_decorator(login_required, name="dispatch")
 class AuthorCreate(CreateView):
-	model = Author
+	model = BookAuthor
 	fields = ['name', 'country']
 
 @method_decorator(login_required, name='dispatch')

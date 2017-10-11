@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Series, Author, Book, Search, Upload, Review
+from .models import BookSeries, BookAuthor, Book, BookSearch, BookUpload, BookReview
 
-admin.site.register(Author)
-admin.site.register(Series)
+admin.site.register(BookAuthor)
+admin.site.register(BookSeries)
 admin.site.register(Book)
-admin.site.register(Search)
-admin.site.register(Upload)
-admin.site.register(Review)
+admin.site.register(BookSearch)
+admin.site.register(BookUpload)
+admin.site.register(BookReview)

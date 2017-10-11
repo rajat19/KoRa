@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 
-class Series(models.Model):
+class BookSeries(models.Model):
 	title = models.CharField(max_length=250, unique=True)
 	no_of_books = models.CharField(max_length=2)
 
@@ -17,7 +17,7 @@ class Series(models.Model):
 	class Meta:
 		verbose_name_plural = 'series'
 
-class Author(models.Model):
+class BookAuthor(models.Model):
 	name = models.CharField(max_length=100)
 	country = models.CharField(max_length=100, blank=True)
 
@@ -31,11 +31,11 @@ class Author(models.Model):
 		unique_together = ['name', 'country']
 
 class Book(models.Model):
-	author = models.ForeignKey(Author, blank=True, default='')
+	author = models.ForeignKey(BookAuthor, blank=True, default='')
 	title = models.CharField(max_length=250)
 	language = models.CharField(max_length=100, blank=True, null=True)
 	genre = models.CharField(max_length=200)
-	series = models.ForeignKey(Series, null=True, blank=True, default='')
+	series = models.ForeignKey(BookSeries, null=True, blank=True, default='')
 	synopsis = models.TextField(max_length=1000)
 	year = models.CharField(null=True, blank=True, max_length=4)
 	logo = models.CharField(max_length=300, blank=True)
@@ -50,7 +50,7 @@ class Book(models.Model):
 	class Meta:
 		unique_together = ['title', 'author']
 
-class Upload(models.Model):
+class BookUpload(models.Model):
 	book = models.ForeignKey(Book, null=True)
 	uploader = models.ForeignKey(User, on_delete=models.CASCADE)
 	file = models.FileField()
@@ -61,7 +61,7 @@ class Upload(models.Model):
 		fname, extension = os.path.splitext(self.file.name)
 		return extension
 
-class Search(models.Model):
+class BookSearch(models.Model):
 	searchedBy = models.ForeignKey(User, on_delete=models.CASCADE)
 	query = models.CharField(max_length=50, default='')
 	searchedAt = models.DateTimeField(null=True)
@@ -69,7 +69,7 @@ class Search(models.Model):
 	class Meta:
 		verbose_name_plural = 'search'
 
-class Review(models.Model):
+class BookReview(models.Model):
 	book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
 	reviewer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 	review = models.TextField(max_length=1000)
