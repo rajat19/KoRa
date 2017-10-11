@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'books.apps.BooksConfig',
-    'music.apps.MusicConfig',
-    'videos.apps.VideosConfig',
+    'musique.apps.MusiqueConfig',
+    # 'videos.apps.VideosConfig',
     'social_django',
 ]
 

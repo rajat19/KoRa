@@ -9,8 +9,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^books/', include('books.urls')),
-	url(r'^music/', include('music.urls')),
-	url(r'^videos/', include('videos.urls')),
+	url(r'^songs/', include('musique.urls')),
+	# url(r'^videos/', include('videos.urls')),
 	url(r'^api/v1/', include('social_django.urls'), name="social")
 ]
 
