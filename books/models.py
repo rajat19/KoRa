@@ -47,6 +47,9 @@ class Book(models.Model):
 	def get_absolute_url(self):
 		return reverse('books:detail', kwargs={'pk': self.pk})
 
+	def get_fields(self):
+		return [(field.name, field.value_to_string(self)) for field in Book._meta.fields]
+
 	class Meta:
 		unique_together = ['title', 'author']
 
@@ -85,4 +88,4 @@ class BookReview(models.Model):
 			self.createdAt = timezone.now()
 
 		self.updatedAt = timezone.now()
-		return super(Review, self).save(*args, **kwargs)
+		return super(BookReview, self).save(*args, **kwargs)

@@ -65,9 +65,6 @@ class ReviewCreate(View):
 	form_class = ReviewForm
 	template_name = 'musique/song.html'
 
-	def get(self, request):
-		pass
-
 	def post(self, request):
 		form = self.form_class(request.POST)
 
@@ -142,7 +139,8 @@ class AlbumDelete(DeleteView):
 class SearchEverything(generic.ListView):
 	template_name = 'musique/result.html'
 	context_object_name = 'all_data'
-    
+
+    # TODO: Add a side option to search by genre
 	def get_queryset(self):
 		searchString = self.request.GET.get('search') or '-created'
 		# queryString = super(SearchEverything, self).get_queryset()

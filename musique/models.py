@@ -23,7 +23,7 @@ class Genre(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.id:
 			self.slug = slugify(self.name)
-		super(SongArtist, self).save(*args, **kwargs)
+		super(Genre, self).save(*args, **kwargs)
 
 class SongAlbum(models.Model):
 	slug = models.SlugField(max_length=40, unique=True)
@@ -48,6 +48,8 @@ class Song(models.Model):
 	name = models.CharField(max_length=250)
 	album = models.ForeignKey(SongAlbum, on_delete=models.CASCADE)
 	genre = models.ManyToManyField(Genre)
+	language = models.CharField(max_length=40, null=True)
+	duration = models.CharField(max_length=10, null=True)
 	likes = models.IntegerField(default=0)
 	times_played = models.IntegerField(default=0)
 
