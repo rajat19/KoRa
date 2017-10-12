@@ -16,12 +16,21 @@ class SongArtist(models.Model):
 			self.slug = slugify(self.name)
 		super(SongArtist, self).save(*args, **kwargs)
 
+class Genre(models.Model):
+	slug = models.SlugField(max_length=40, unique=True)
+	name = models.CharField(max_length=100)
+
+	def save(self, *args, **kwargs):
+		if not self.id:
+			self.slug = slugify(self.name)
+		super(SongArtist, self).save(*args, **kwargs)
+
 class SongAlbum(models.Model):
 	slug = models.SlugField(max_length=40, unique=True)
 	artist = models.ForeignKey(SongArtist)
-	title = models.CharField(max_length=250, unique=True)
-	released_date = models.DateTimeField(null=True, blank=True)
-	genre = models.CharField(max_length=100)
+	name = models.CharField(max_length=250, unique=True)
+	release_date = models.DateTimeField(null=True, blank=True)
+	genre = models.ManyToManyField(Genre)
 	logo = models.FileField()
 	popularity = models.IntegerField(default=0)
 	rating = models.IntegerField(default=0)
@@ -38,6 +47,7 @@ class Song(models.Model):
 	slug = models.SlugField(max_length=40, unique=True)
 	name = models.CharField(max_length=250)
 	album = models.ForeignKey(SongAlbum, on_delete=models.CASCADE)
+	genre = models.ManyToManyField(Genre)
 	likes = models.IntegerField(default=0)
 	times_played = models.IntegerField(default=0)
 

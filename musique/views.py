@@ -142,6 +142,7 @@ class AlbumDelete(DeleteView):
 class SearchEverything(generic.ListView):
 	template_name = 'musique/result.html'
 	context_object_name = 'all_data'
+    
 	def get_queryset(self):
 		searchString = self.request.GET.get('search') or '-created'
 		# queryString = super(SearchEverything, self).get_queryset()

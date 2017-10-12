@@ -30,7 +30,7 @@ class ReviewForm(forms.ModelForm):
         fields = ['song', 'reviewer', 'review', 'createdAt', 'deletedAt']
 
 class AlbumForm(forms.ModelForm):
-    fields = ['artist', 'title', 'released_date', 'genre', 'logo', 'popularity', 'rating']
+    fields = ['artist', 'name', 'release_date', 'genre', 'logo', 'popularity', 'rating']
 
     def __init__(self, *args, **kwargs):
         super(AlbumForm, self).__init__(*args, **kwargs)
@@ -38,7 +38,7 @@ class AlbumForm(forms.ModelForm):
 
     class Meta:
         model = SongAlbum
-        fields = ['artist', 'title', 'released_date', 'genre', 'logo', 'popularity', 'rating']
+        fields = ['artist', 'name', 'release_date', 'genre', 'logo', 'popularity', 'rating']
 
 
 # class SearchForm(forms.ModelForm):
