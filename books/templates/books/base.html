@@ -37,11 +37,11 @@
 </head>
 <body class="{% block bgimg %}a5{% endblock %}">
 	<div class="navbar-fixed">
-		{% include 'books/nav/submenu' %}
+		{% include 'books/nav/submenu.html' %}
 
 		<ul class="side-nav deep-orange darken-2" id="mobili">
-			{% include 'books/nav/submenu' %}
-			{% include 'books/nav/mobile' %}
+			{% include 'books/nav/submenu.html' %}
+			{% include 'books/nav/mobile.html' %}
 		</ul>
 
 		<nav class="deep-orange accent-1">
@@ -49,7 +49,7 @@
 				<a class="brand-logo">Kora Kagaz</a>
 				<a href="#" data-activates="mobili" class="button-collapse"><span><i class="fa fa-reorder"></i></span></a>
 				<ul id="deski" class="right hide-on-med-and-down" style="padding-right: 10px;">
-					{% include 'books/nav/web' %}
+					{% include 'books/nav/web.html' %}
 				</ul>
 			</div>
 		</nav>
