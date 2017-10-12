@@ -1,0 +1,20 @@
+<li>
+	<form action="{% url 'books:search' %}" method="GET">
+		<div class="input-field col s4">
+			<input type="text" name="search" id="search" placeholder="Search Books...">
+			<button class="btn deep-orange" type="submit">Search</button>
+		</div>
+	</form>
+</li>
+<!-- <li><a href="#">Login</a></li> -->
+<li><a href="{% url 'books:index' %}">Books</a></li>
+<li><a href="{% url 'books:series-list' %}">Series</a></li>
+<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <span><i class="fa fa-angle-down"></i></span></a></li>
+<li><a href="{% url 'books:upload' %}">Upload</a></li>
+{% if request.user.is_authenticated %}
+<li>
+	<a href="#!" class="dropdown-button" data-activates="dropdown-account">Hi, {{ request.user }} <i class="material-icons right">arrow_drop_down</i></a>
+</li>
+{% else %}
+	<li><a href="{% url 'accounts:login' %}">Login</a></li>
+{% endif %}

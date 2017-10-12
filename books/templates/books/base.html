@@ -37,57 +37,11 @@
 </head>
 <body class="{% block bgimg %}a5{% endblock %}">
 	<div class="navbar-fixed">
-		<ul class="dropdown-content deep-orange darken-2" id="dropdown-add">
-			<li><a href="{% url 'books:series-add' %}">Add Series</a></li>
-			<li><a href="{% url 'books:book-add' %}">Add Books</a></li>
-			<li><a href="{% url 'books:author-add' %}">Add Authors</a></li>
-		</ul>
-		<ul class="dropdown-content deep-orange darken-2" id="dropdown-book">
-			<li><a href="{% url 'books:index' %}">All</a></li>
-			<li><a href="{% url 'books:authors' %}">By Authors</a></li>
-		</ul>
-		<ul class="dropdown-content deep-orange darken-2" id="dropdown-account">
-			<li><a href="{% url 'accounts:profile' %}">Profile <span><i class="fa fa-user"></i></span></a></li>
-			<li><a href="#!">Settings</a></li>
-			<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
-		</ul>
+		{% include 'books/base_submenu' %}
 
 		<ul class="side-nav deep-orange darken-2" id="mobili">
-			<ul class="dropdown-content deep-orange darken-2" id="dropdown-add">
-				<li><a href="{% url 'books:series-add' %}">Add Series</a></li>
-				<li><a href="{% url 'books:book-add' %}">Add Books</a></li>
-				<li><a href="{% url 'books:author-add' %}">Add Authors</a></li>
-			</ul>
-			<ul class="dropdown-content deep-orange darken-2" id="dropdown-book">
-				<li><a href="{% url 'books:index' %}">All</a></li>
-				<li><a href="{% url 'books:authors' %}">By Authors</a></li>
-			</ul>
-			<ul class="dropdown-content deep-orange darken-2" id="dropdown-account">
-				<li><a href="{% url 'accounts:profile' %}">Profile <span><i class="fa fa-user fa-fw"></i></span></a></li>
-				<li><a href="#!">Settings <span><i class="fa fa-cog fa-fw"></i></span></a></li>
-				<li><a href="{% url 'accounts:logout' %}">Logout <span><i class="fa fa-sign-out fa-fw"></i></span></a></li>
-			</ul>
-
-			<li>
-				<form action="{% url 'books:search' %}" method="GET">
-					<div class="input-field col s4">
-						<input type="text" name="search" id="search" placeholder="Search Books...">
-						<button class="btn deep-orange" type="submit">Search</button>
-					</div>
-				</form>
-			</li>
-			<!-- <li><a href="#">Login</a></li> -->
-			<li><a href="{% url 'books:index' %}">Books</a></li>
-			<li><a href="{% url 'books:series-list' %}">Series</a></li>
-			<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <span><i class="fa fa-angle-down"></i></span></a></li>
-			<li><a href="{% url 'books:upload' %}">Upload</a></li>
-			{% if request.user.is_authenticated %}
-			<li>
-				<a href="#!" class="dropdown-button" data-activates="dropdown-account">Hi, {{ request.user }} <i class="material-icons right">arrow_drop_down</i></a>
-			</li>
-			{% else %}
-				<li><a href="{% url 'accounts:login' %}">Login</a></li>
-			{% endif %}
+			{% include 'books/base_submenu' %}
+			{% include 'books/base_mobile' %}
 		</ul>
 
 		<nav class="deep-orange accent-1">
@@ -95,26 +49,7 @@
 				<a class="brand-logo">Kora Kagaz</a>
 				<a href="#" data-activates="mobili" class="button-collapse"><span><i class="fa fa-reorder"></i></span></a>
 				<ul id="deski" class="right hide-on-med-and-down" style="padding-right: 10px;">
-					<li>
-						<form action="{% url 'books:search' %}" method="GET">
-							<div class="input-field col s8">
-								<input type="search" name="search" id="search-nav">
-								<label class="label-icon" for="search"><i class="material-icons">search</i></label>
-								<i class="material-icons">close</i>
-							</div>
-						</form>
-					</li>
-					<li><a href="#!" class="dropdown-button" data-activates="dropdown-book">Book List <i class="material-icons right">arrow_drop_down</i></a></li>
-					<li><a href="{% url 'books:series-list' %}">Series</a></li>
-					<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <i class="material-icons right">arrow_drop_down</i></a></li>
-					<li><a href="{% url 'books:upload' %}">Upload</a></li>
-					{% if request.user.is_authenticated %}
-					<li>
-						<a href="#!" class="dropdown-button" data-activates="dropdown-account">Hi, {{ request.user }} <i class="material-icons right">arrow_drop_down</i></a>
-					</li>
-					{% else %}
-					<li><a href="{% url 'accounts:login' %}">Login</a></li>
-					{% endif %}
+					{% include 'books/base_web' %}
 				</ul>
 			</div>
 		</nav>
