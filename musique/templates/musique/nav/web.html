@@ -1,0 +1,20 @@
+<li>
+	<form action="{% url 'musique:search' %}" method="GET">
+		<div class="input-field col s8">
+			<input type="search" name="search" id="search-nav">
+			<label class="label-icon" for="search"><i class="material-icons">search</i></label>
+			<i class="material-icons">close</i>
+		</div>
+	</form>
+</li>
+<li><a href="{% url 'musique:index' %}">Home</a></li>
+<li><a href="{% url 'musique:album-list' %}">Albums</a></li>
+<li><a href="#!" class="dropdown-button" data-activates="dropdown-add">Add New <i class="material-icons right">arrow_drop_down</i></a></li>
+<li><a href="{% url 'musique:upload' %}">Upload</a></li>
+{% if request.user.is_authenticated %}
+<li>
+	<a href="#!" class="dropdown-button" data-activates="dropdown-account">Hi, {{ request.user }} <i class="material-icons right">arrow_drop_down</i></a>
+</li>
+{% else %}
+<li><a href="{% url 'accounts:login' %}">Login</a></li>
+{% endif %}
