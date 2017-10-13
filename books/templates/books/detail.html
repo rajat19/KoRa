@@ -86,7 +86,7 @@
 						<div class="row">
 							<h5 class="center">Reviews</h5>
 							<ul class="collection">
-							{% for review in book.review_set.all %}
+							{% for review in book.bookreview_set.all %}
 								<li class="collection-item avatar transparent">
 								 {% if review.reviewer.photo %}
 								 	<img src="{{ review.reviwer.photo }}" alt="" class="circle">

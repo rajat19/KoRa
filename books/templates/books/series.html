@@ -11,7 +11,7 @@
 						<span class="card-title center">{{series.title}}</span>
 						<div class="row">
 							Total Books in the Series: {{series.no_of_books}}
-							{% for book in series.book_set.all %}
+							{% for book in bookseries.book_set.all %}
 								<div class="col m4 s12 center">
 									<a href="{% url 'books:detail' book.id %}">
 										<div class="card z-depth-5">
