@@ -26,12 +26,12 @@ class DetailView(generic.DetailView):
 @method_decorator(login_required, name="dispatch")
 class BookCreate(CreateView):
 	form_class = BookForm
-	template_name = 'books/book_form.html'
+	template_name = 'books/forms/book.html'
 
 @method_decorator(login_required, name="dispatch")
 class BookUpdate(UpdateView):
 	model = Book
-	template_name = 'books/book_update_form.html'
+	template_name = 'books/forms/book_update.html'
 	fields = ['series', 'title', 'author', 'language', 'genre', 'synopsis', 'logo_file']
 
 @method_decorator(login_required, name="dispatch")
@@ -42,7 +42,7 @@ class BookDelete(DeleteView):
 @method_decorator(login_required, name="dispatch")
 class BookUpload(View):
 	form_class = UploadForm
-	template_name = 'books/upload_form.html'
+	template_name = 'books/forms/upload.html'
 
 	def get(self, request):
 		form = self.form_class(None)
@@ -73,6 +73,7 @@ class SeriesView(generic.DetailView):
 class SeriesCreate(CreateView):
 	model = BookSeries
 	fields = ['title', 'no_of_books']
+	template_name = 'books/forms/series.html'
 
 class SearchEverything(generic.ListView):
 	template_name = 'books/result.html'
@@ -106,6 +107,7 @@ class AuthorView(generic.DetailView):
 class AuthorCreate(CreateView):
 	model = BookAuthor
 	fields = ['name', 'country']
+	template_name = 'books/forms/author.html'
 
 @method_decorator(login_required, name='dispatch')
 class ReviewCreate(View):

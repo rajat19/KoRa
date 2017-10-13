@@ -10,13 +10,13 @@
 						<span class="card-title">Start uploading......</span>
 						<form action="" method="POST" enctype="multipart/form-data">
 							{% csrf_token %}
-							{% include 'books/form_template.html' %}
+							{% include 'books/forms/template.html' %}
 							<div class="row">
 						    	<div class="input-field col s12">
 						    		<button class="btn waves-effect waves-light green lighten-1" type="submit">Upload
 										<span><i class="fa fa-book"></i></span>
 									</button>
-						    	</div>								
+						    	</div>
 							</div>
 						</form>
 					</div>
