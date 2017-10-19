@@ -10,7 +10,7 @@ class SongArtist(models.Model):
 	name = models.CharField(max_length=100)
 	country = models.CharField(max_length=50, null=True, blank=True)
 	popularity = models.IntegerField(default=0)
-	photo = models.FileField()
+	photo = models.FileField(default='')
 
 	def save(self, *args, **kwargs):
 		if not self.id:

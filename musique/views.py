@@ -20,7 +20,7 @@ class IndexView(generic.ListView):
         # TODO: add recently played
         # TODO: add top charts
 		popular_songs = Song.objects.all().order_by('times_played')[:10]
-        recent_albums = SongAlbum.objects.all().order_by('-release_date')[:10]
+		recent_albums = SongAlbum.objects.all().order_by('-release_date')[:10]
 		popular_artists = SongArtist.objects.all().order_by('popularity')[:10]
 		data = {
             'popular_songs': popular_songs,
