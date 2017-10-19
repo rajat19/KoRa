@@ -116,3 +116,20 @@ main{
 	-webkit-border-radius:5px;
 	/*background:-webkit-linear-gradient(60deg,orange,white);*/
 }
+
+#common-strip {
+	position: fixed;
+	width: 100%;
+}
+
+nav {
+	margin-top: 20px;
+}
+
+nav .nav-wrapper {
+	padding-left: 10px;
+}
+
+.container {
+	margin-top: 20px;
+}

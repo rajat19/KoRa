@@ -19,24 +19,30 @@
 			opacity: 0.8
 		}
 		.a2 {
-			background-image: url('{% static 'books/images/a2.jpg' %}') !important;
+			background-image: url('{% static "books/images/a2.jpg" %}') !important;
 		}
 		.a3 {
-			background-image: url('{% static 'books/images/a3.jpg' %}') !important;
+			background-image: url('{% static "books/images/a3.jpg" %}') !important;
 		}
 		.a4 {
-			background-image: url('{% static 'books/images/a4.jpg' %}') !important;
+			background-image: url('{% static "books/images/a4.jpg" %}') !important;
 		}
 		.a5 {
-			background-image: url('{% static 'books/images/a5.jpg' %}') !important;
+			background-image: url('{% static "books/images/a5.jpg" %}') !important;
 		}
 		.a7 {
-			background-image: url('{% static 'books/images/a8.jpg' %}') !important;
+			background-image: url('{% static "books/images/a8.jpg" %}') !important;
 		}
 	</style>
 </head>
 <body class="{% block bgimg %}a5{% endblock %}">
 	<div class="navbar-fixed">
+		<div class="deep-orange accent-4" id="common-strip">
+			Go and Navigate to all related apps: 
+			<span><a href="{% url 'books:index' %}">Kagaz</a></span>
+			<span><a href="{% url 'musique:index' %}">Musique</a></span>
+			<span><a href="#!">Vidoo</a></span>
+		</div>
 		{% include 'musique/nav/submenu.html' %}
 
 		<ul class="side-nav deep-orange darken-2" id="mobili">
@@ -45,7 +51,7 @@
 		</ul>
 
 		<nav class="deep-orange accent-1">
-			<div class="nav-wrapper" style="padding-left: 10px">
+			<div class="nav-wrapper">
 				<a class="brand-logo">Kora Musique</a>
 				<a href="#" data-activates="mobili" class="button-collapse"><span><i class="fa fa-reorder"></i></span></a>
 				<ul id="deski" class="right hide-on-med-and-down" style="padding-right: 10px;">
