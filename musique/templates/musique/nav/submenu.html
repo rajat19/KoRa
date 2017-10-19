@@ -1,11 +1,13 @@
 <ul class="dropdown-content deep-orange darken-2" id="dropdown-add">
-	<li><a href="{% url 'books:series-add' %}">Add Series</a></li>
-	<li><a href="{% url 'books:book-add' %}">Add Books</a></li>
-	<li><a href="{% url 'books:author-add' %}">Add Authors</a></li>
+	<li><a href="{% url 'musique:album-add' %}">Add Album</a></li>
+	<li><a href="{% url 'musique:artist-add' %}">Add Artist</a></li>
+	<li><a href="{% url 'musique:song-add' %}">Add Song</a></li>
 </ul>
-<ul class="dropdown-content deep-orange darken-2" id="dropdown-book">
-	<li><a href="{% url 'books:index' %}">All</a></li>
-	<li><a href="{% url 'books:authors' %}">By Authors</a></li>
+<ul class="dropdown-content deep-orange darken-2" id="dropdown-browse">
+	<li><a href="{% url 'musique:albums' %}">Top Albums</a></li>
+	<li><a href="{% url 'musique:artists' %}">Top Artists</a></li>
+	<li><a href="{% url 'musique:songs' %}">Top Songs</a></li>
+	<!-- <li><a href="{% url 'musique:artists' %}">Top Playlists</a></li> -->
 </ul>
 <ul class="dropdown-content deep-orange darken-2" id="dropdown-account">
 	<li><a href="{% url 'accounts:profile' %}">Profile <span><i class="fa fa-user fa-fw"></i></span></a></li>
