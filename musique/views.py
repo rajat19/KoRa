@@ -13,42 +13,42 @@ from .models import SongArtist, SongAlbum, Song, SongUpload, SongReview
 decorators = [login_required]
 
 class IndexView(generic.ListView):
-    template_name = 'musique/index.html'
-    context_object_name = 'all_data'
+	template_name = 'musique/index.html'
+	context_object_name = 'all_data'
 
-    def get_queryset(self):
-        # TODO: add recently played
-        # TODO: add top charts
+	def get_queryset(self):
+		# TODO: add recently played
+		# TODO: add top charts
 		popular_songs = Song.objects.all().order_by('times_played')[:10]
 		recent_albums = SongAlbum.objects.all().order_by('-release_date')[:10]
 		popular_artists = SongArtist.objects.all().order_by('popularity')[:10]
 		data = {
-            'popular_songs': popular_songs,
-            'recent_albums': recent_albums,
-            'popular_artists': popular_artists,
+			'popular_songs': popular_songs,
+			'recent_albums': recent_albums,
+			'popular_artists': popular_artists,
 		}
 		return data
 
 class SongList(generic.ListView):
-    template_name = 'musique/songs.html'
-    context_object_name = 'all_songs'
+	template_name = 'musique/songs.html'
+	context_object_name = 'all_songs'
 
-    def get_queryset(self):
-        return Song.objects.all().order_by('liked')
+	def get_queryset(self):
+		return Song.objects.all().order_by('liked')
 
 class SongView(generic.DetailView):
-    model = Song
-    template_name = 'musique/song.html'
+	model = Song
+	template_name = 'musique/song.html'
 
 @method_decorator(login_required, name="dispatch")
 class SongCreate(CreateView):
 	form_class = SongForm
-	template_name = 'musique/song_form.html'
+	template_name = 'musique/forms/song.html'
 
 @method_decorator(login_required, name="dispatch")
 class SongUpdate(UpdateView):
 	model = Song
-	template_name = 'musique/song_update_form.html'
+	template_name = 'musique/forms/song_update.html'
 	fields = ['name', 'album']
 
 @method_decorator(login_required, name="dispatch")
@@ -59,7 +59,7 @@ class SongDelete(DeleteView):
 @method_decorator(login_required, name="dispatch")
 class SongUpload(View):
 	form_class = UploadForm
-	template_name = 'musique/upload_form.html'
+	template_name = 'musique/forms/upload.html'
 
 	def get(self, request):
 		form = self.form_class(None)
@@ -98,25 +98,26 @@ class ReviewCreate(View):
 		return redirect('musique:detail', slug=form.cleaned_data['song'].slug)
 
 class ArtistList(generic.ListView):
-    template_name = 'musique/artists.html'
-    context_object_name = 'all_artists'
+	template_name = 'musique/artists.html'
+	context_object_name = 'all_artists'
 
-    def get_queryset(self):
-        return SongArtist.objects.all().order_by('popularity')
+	def get_queryset(self):
+		return SongArtist.objects.all().order_by('popularity')
 
 class ArtistView(generic.DetailView):
-    model = SongArtist
-    template_name = 'musique/artist.html'
+	model = SongArtist
+	template_name = 'musique/artist.html'
 
 @method_decorator(login_required, name="dispatch")
 class ArtistCreate(CreateView):
-    model = SongArtist
-    fields = ['name', 'country']
+	model = SongArtist
+	fields = ['name', 'country']
+	template_name = 'musique/forms/artist.html'
 
 @method_decorator(login_required, name="dispatch")
 class ArtistUpdate(UpdateView):
 	model = SongArtist
-	template_name = 'musique/artist_update_form.html'
+	template_name = 'musique/forms/artist_update.html'
 	fields = ['name', 'country', 'popularity']
 
 @method_decorator(login_required, name="dispatch")
@@ -125,25 +126,25 @@ class ArtistDelete(DeleteView):
 	success_url = reverse_lazy('musique:artists')
 
 class AlbumList(generic.ListView):
-    template_name = 'musique/albums.html'
-    context_object_name = 'all_albums'
+	template_name = 'musique/albums.html'
+	context_object_name = 'all_albums'
 
-    def get_queryset(self):
-        return SongAlbum.objects.all().order_by('popularity')
+	def get_queryset(self):
+		return SongAlbum.objects.all().order_by('popularity')
 
 class AlbumView(generic.DetailView):
-    model = SongAlbum
-    template_name = 'musique/album.html'
+	model = SongAlbum
+	template_name = 'musique/album.html'
 
 @method_decorator(login_required, name="dispatch")
 class AlbumCreate(CreateView):
-    form_class = AlbumForm
-    template_name = 'musique/album_form.html'
+	form_class = AlbumForm
+	template_name = 'musique/forms/album.html'
 
 @method_decorator(login_required, name="dispatch")
 class AlbumUpdate(UpdateView):
 	model = SongAlbum
-	template_name = 'musique/album_update_form.html'
+	template_name = 'musique/forms/album_update.html'
 	fields = ['artist', 'title', 'released_date', 'genre', 'logo', 'popularity', 'rating']
 
 @method_decorator(login_required, name="dispatch")
@@ -155,7 +156,7 @@ class SearchEverything(generic.ListView):
 	template_name = 'musique/result.html'
 	context_object_name = 'all_data'
 
-    # TODO: Add a side option to search by genre
+	# TODO: Add a side option to search by genre
 	def get_queryset(self):
 		searchString = self.request.GET.get('search') or '-created'
 		# queryString = super(SearchEverything, self).get_queryset()
