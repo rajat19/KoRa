@@ -7,6 +7,9 @@ urlpatterns = [
     # /musique/
     url(r'^$', views.IndexView.as_view(), name='index'),
 
+    # /musique/songs
+    url(r'^songs/$', views.SongList.as_view(), name='songs'),
+
     # /musique/song/in-the-end
     url(r'^song/(?P<slug>[\w-]+)/$', views.SongView.as_view(), name='detail'),
 
