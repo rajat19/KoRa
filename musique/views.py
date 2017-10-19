@@ -14,12 +14,27 @@ decorators = [login_required]
 
 class IndexView(generic.ListView):
     template_name = 'musique/index.html'
+    context_object_name = 'all_data'
+
+    def get_queryset(self):
+        # TODO: add recently played
+        # TODO: add top charts
+		popular_songs = Song.objects.all().order_by('times_played')[:10]
+        recent_albums = SongAlbum.objects.all().order_by('-release_date')[:10]
+		popular_artists = SongArtist.objects.all().order_by('popularity')[:10]
+		data = {
+            'popular_songs': popular_songs,
+            'recent_albums': recent_albums,
+            'popular_artists': popular_artists,
+		}
+		return data
+
+class SongList(generic.ListView):
+    template_name = 'musique/songs.html'
     context_object_name = 'all_songs'
 
-    # TODO: Display Album/Artist also on index page -> See Gaana.com for reference
-    # TODO: Add a song list page
     def get_queryset(self):
-        return Song.objects.all().order_by('name')
+        return Song.objects.all().order_by('liked')
 
 class SongView(generic.DetailView):
     model = Song
