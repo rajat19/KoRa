@@ -10,7 +10,7 @@
 						<span class="card-title">Add New Album</span>
 						<form action="" method="POST" enctype="multipart/form-data">
 							{% csrf_token %}
-							{% include 'accounts/forms/template.html' %}
+							{% include 'common/forms/template.html' %}
 							{% if form.error %}
 								{{ form.error }}
 							{% endif %}
