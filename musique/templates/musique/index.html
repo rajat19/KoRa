@@ -1,0 +1,58 @@
+{% extends 'musique/base.html' %}
+
+{% block bgimg %}a7{% endblock %}
+{% block body %}
+	<section>
+		<div class="row">
+		<!-- <h2>TOP CHARTS</h2> -->
+		<h2>NEW RELEASES</h2>
+		{% for album in all_data.recent_albums %}
+			<div class="col m4 s12 center">
+				<a href="{% url 'musique:album' album.slug %}" class="white-text">
+					<div class="card z-depth-5">
+						<div class="card-content deep-orange lighten-2" style="padding: 1px;">
+							<h5> {{album.name}} </h5>
+						</div>
+						<div class="card-content" style="padding: 5px;">
+							<!-- <span class="card-title">{{book.title}}</span> -->
+							<img src="{{ album.logo.url }}" class="img responsive-img img-enhance" style="height: 200px;">
+						</div>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+		<h2>TRENDING SONGS</h2>
+		{% for song in all_data.popular_songs %}
+			<div class="col m4 s12 center">
+				<a href="{% url 'musique:song' song.slug %}" class="white-text">
+					<div class="card z-depth-5">
+						<div class="card-content deep-orange lighten-2" style="padding: 1px;">
+							<h5> {{song.name}} </h5>
+						</div>
+						<div class="card-content" style="padding: 5px;">
+							<!-- <span class="card-title">{{book.title}}</span> -->
+							<img src="{{ book.album.logo.url }}" class="img responsive-img img-enhance" style="height: 200px;">
+						</div>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+		<h2>FEATURED ARTISTS</h2>
+		{% for artist in all_data.popular_artists %}
+			<div class="col m4 s12 center">
+				<a href="{% url 'musique:artist' artist.id %}" class="white-text">
+					<div class="card z-depth-5">
+						<div class="card-content deep-orange lighten-2" style="padding: 1px;">
+							<h5> {{artist.name}} </h5>
+						</div>
+						<div class="card-content" style="padding: 5px;">
+							<!-- <span class="card-title">{{book.title}}</span> -->
+							<img src="{{ artist.photo.url }}" class="img responsive-img img-enhance" style="height: 200px;">
+						</div>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+		</div>
+	</section>
+{% endblock %}
