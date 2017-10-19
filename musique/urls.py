@@ -57,4 +57,7 @@ urlpatterns = [
 
     # /musique/album/meteora/delete
     url(r'^album/(?P<slug>[\w-]+)/delete/$', views.AlbumDelete.as_view(), name='album-delete'),
+
+    # search/
+    url(r'^search/$', views.SearchEverything.as_view(), name="search"),
 ]

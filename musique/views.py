@@ -159,9 +159,9 @@ class SearchEverything(generic.ListView):
 	def get_queryset(self):
 		searchString = self.request.GET.get('search') or '-created'
 		# queryString = super(SearchEverything, self).get_queryset()
-		songs = Song.objects.filter(title__contains=searchString)
+		songs = Song.objects.filter(name__contains=searchString)
 		albums = SongAlbum.objects.filter(name__contains=searchString)
-		artists = SongArtist.objects.filter(title__contains=searchString)
+		artists = SongArtist.objects.filter(name__contains=searchString)
 		data = {
 			'artists': artists,
 			'albums': albums,
