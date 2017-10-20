@@ -11,6 +11,14 @@
 					<input class="file-path validate" type="text">
 				</div>
 			</div>
+		{% elif field|fieldtype == 'DateTimeInput' %}
+			<div class="input-field col s12">
+				<span class="red-text">
+					{{ field.errors }}
+				</span>
+				<input type="text" name="{{ field.name }}" class="datepicker">
+				{{ field.label_tag }}
+			</div>
 		{% elif field|fieldtype == 'Textarea' %}
 			<div class="input-field col s12">
 				<span class="red-text">

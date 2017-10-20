@@ -9,13 +9,13 @@ $(document).ready(function() {
 	});
 	$('.materialize-textarea').trigger('autoresize');
 	$('.ul.tabs').tabs();
-	// $('.datepicker').pickadate({
-	// 	selectMonths: true,
-	// 	selectYears: 15,
-	// 	format: 'You selecte!d: dddd, dd mmm, yyyy',
-	// 	formatSubmit: 'yyyy-mm-dd',
-	// 	hiddenName: true,
-	// });
+	$('.datepicker').pickadate({
+		selectMonths: true,
+		selectYears: 15,
+		format: 'dddd, dd mmm, yyyy',
+		formatSubmit: 'yyyy-mm-dd',
+		hiddenName: true,
+	});
 
 	// $('.timepicker').pickatime({
 	//     default: 'now',
