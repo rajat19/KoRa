@@ -4,7 +4,7 @@
 
 {% block body %}
 {% load staticfiles %}
-{% load book_extras %}
+{% load template_extras %}
 	<section>
 		<div class="row">
 			<div class="col m10 s12 offset-m1">
@@ -81,23 +81,26 @@
 						</div>
 
 						<!-- /Review Modal -->
-						{% define 'no' as reviewed %}
+						{% assign reviewed false %}
 						<div class="red" style="height: 2px"></div>
 						<div class="row">
 							<h5 class="center">Reviews</h5>
 							<ul class="collection">
 							{% for review in book.bookreview_set.all %}
 								<li class="collection-item avatar transparent">
-								 {% if review.reviewer.photo %}
+								{% if review.reviewer.photo %}
 								 	<img src="{{ review.reviwer.photo }}" alt="" class="circle">
-								 {% else %}
+								{% else %}
 								 	<img src="{% static 'books/images/a3.jpg' %}" alt="" class="circle">
 									<i class="fa fa-book circle blue"></i>
-								 {% endif %}
+								{% endif %}
 									<span class="title">{{ review.reviewer }}</span>
 									<p>{{ review }} </p>
 									<p class="secondary-content notif-date">Written At: {{review.createdAt}}</p>
 								</li>
+								{% if review.reviewer == request.user %}
+									{% assign reviewed true %}
+								{% endif %}
 							{% empty %}
 								No reviews yet
 							{% endfor %}
@@ -105,8 +108,8 @@
 						</div>
 						<!-- Reviews -->
 						<div class="row center">
-							{% if reviewed == 'yes' %}
-								You had already reviewed the book
+							{% if reviewed.value %}
+								<h5>You had already reviewed the book</h5>
 							{% else %}
 							<h5>Have you read this book ? Share your ideas on it</h5>
 								{% if request.user.is_active %}
