@@ -111,14 +111,14 @@ class ArtistView(generic.DetailView):
 @method_decorator(login_required, name="dispatch")
 class ArtistCreate(CreateView):
 	model = SongArtist
-	fields = ['name', 'country']
+	fields = ['name', 'country', 'photo']
 	template_name = 'musique/forms/artist.html'
 
 @method_decorator(login_required, name="dispatch")
 class ArtistUpdate(UpdateView):
 	model = SongArtist
 	template_name = 'musique/forms/artist_update.html'
-	fields = ['name', 'country', 'popularity']
+	fields = ['name', 'country', 'popularity', 'photo']
 
 @method_decorator(login_required, name="dispatch")
 class ArtistDelete(DeleteView):
