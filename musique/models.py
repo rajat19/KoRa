@@ -10,7 +10,8 @@ class SongArtist(models.Model):
 	name = models.CharField(max_length=100)
 	country = models.CharField(max_length=50, null=True, blank=True)
 	popularity = models.IntegerField(default=0)
-	photo = models.FileField(default='')
+	photo = models.FileField(default='', null=True, blank=True)
+	photo_url = models.CharField(null=True, blank=True, max_length=250)
 
 	def save(self, *args, **kwargs):
 		if not self.id:
@@ -32,7 +33,8 @@ class SongAlbum(models.Model):
 	name = models.CharField(max_length=250, unique=True)
 	release_date = models.DateTimeField(null=True, blank=True)
 	genre = models.ManyToManyField(Genre)
-	logo = models.FileField()
+	logo = models.FileField(null=True, blank=True)
+	logo_url = models.CharField(null=True, blank=True, max_length=250)
 	popularity = models.IntegerField(default=0)
 	rating = models.IntegerField(default=0)
 
