@@ -49,8 +49,10 @@ Temporary Items
 # Python directories
 __pycache__/*
 *.pyc
-media/
-media_old/
+media*/
 
 # Database file
 *.sqlite3
+
+# All templates/test.html
+*/*/*/test.html

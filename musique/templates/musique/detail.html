@@ -1,0 +1,149 @@
+{% extends 'musique/base.html' %}
+
+{% block title %}{{ song.name }}{% endblock %}
+
+{% block body %}
+{% load staticfiles %}
+{% load template_extras %}
+	<section>
+		<div class="row">
+			<div class="col m10 s12 offset-m1">
+				<div class="card z-depth-5">
+					<div class="card-content blue-grey lighten-4">
+						<span class="card-title center">{{song.name}}</span>
+						<div class="row">
+							<div class="col m4 s12 center">
+								{% if song.logo %}
+									<img src="{{ song.logo.url }}" class="img responsive-img" style="height: 300px">
+								{% elif song.logo_url %}
+									<img src="{{ song.logo_url }}" class="img responsive-img" style="height: 300px">
+								{% endif %}
+								<div class="fixed-action-btn click-to-toggle horizontal">
+									<a class="btn-floating btn-large deep-orange">
+										<i class="material-icons">menu</i>
+									</a>
+									<ul>
+										{% if request.user.is_superuser %}
+										<li>
+											<a class="btn-floating red" href="{% url 'musique:song-delete' song.slug %}"><i class="fa fa-trash-o"></i></a>
+										</li>
+										<li>
+											<a class="btn-floating green" href="{% url 'musique:song-update' song.slug %}"><i class="fa fa-edit"></i></a>
+										</li>
+										{% endif %}
+										<li>
+											<a class="btn-floating blue" href="{% url 'musique:upload' %}"><i class="fa fa-upload"></i></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="col m8 s12">
+								<table>
+									<tr>
+										<td>Album: </td>
+										<td><a class="blue-grey-text" href="{% url 'musique:album' song.album.slug %}">{{ song.album }}</a></td>
+										<td>Genre: </td>
+										<td>{{ song.genre }}</td>
+									</tr>
+									<tr>
+										<td>Language: </td>
+										<td>{{ song.language }}</td>
+										<td>Duration: </td>
+										<td>{{ song.duration }}</td>
+									</tr>
+								</table>
+								<div class="red" style="height: 2px"></div>
+								<table class="bordered">
+									<thead>
+										<tr>
+											<th class="center">Uploader</th>
+											<th class="center">No of Downloads</th>
+											<th class="center">Download</th>
+										</tr>
+									</thead>
+									<tbody>
+										{% for upload in song.upload_set.all %}
+											<tr>
+												<td class="center">{{ upload.uploader.username }}</td>
+												<td class="center">{{ upload.no_of_downloads }}</td>
+												<td class="center">
+													<a class="btn blue-grey darken-3" href="{{ upload.file.url }}">
+														Download <i class="fa fa-download"></i>
+													</a>
+												</td>
+											</tr>
+											{% empty %}
+											<tr>
+												<td class="center red-text" colspan="3">No File Uploaded yet</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+
+						<!-- /Review Modal -->
+						{% assign reviewed false %}
+						<div class="red" style="height: 2px"></div>
+						<div class="row">
+							<h5 class="center">Reviews</h5>
+							<ul class="collection">
+							{% for review in song.songreview_set.all %}
+								<li class="collection-item avatar transparent">
+								{% if review.reviewer.photo %}
+								 	<img src="{{ review.reviwer.photo }}" alt="" class="circle">
+								{% else %}
+								 	<img src="{% static 'musique/images/a3.jpg' %}" alt="" class="circle">
+									<i class="fa fa-song circle blue"></i>
+								{% endif %}
+									<span class="title">{{ review.reviewer }}</span>
+									<p>{{ review }} </p>
+									<p class="secondary-content notif-date">Written At: {{review.createdAt}}</p>
+								</li>
+								{% if review.reviewer == request.user %}
+									{% assign reviewed true %}
+								{% endif %}
+							{% empty %}
+								No reviews yet
+							{% endfor %}
+							</ul>
+						</div>
+						<!-- Reviews -->
+						<div class="row center">
+							{% if reviewed.value %}
+								<h5>You had already reviewed the song</h5>
+							{% else %}
+							<h5>Have you listened this song ? Share your ideas on it</h5>
+								{% if request.user.is_active %}
+									<a class="btn-floating green waves-effect waves-light" href="#review-modal"><span><i class="fa fa-comment"></i></span></a>
+
+									<div id="review-modal" class="modal">
+										<form action="{% url 'musique:review-add'%}" method="POST">
+											<div class="modal-content">
+												<h4>Review "{{song.name}}"</h4>
+													<div class="input-field col s12">
+														{% csrf_token %}
+														<input type="hidden" value="{{song.slug}}" name="song">
+														<textarea name="review" id="review" class="materialize-textarea" rows="8" cols="80"></textarea>
+														<label for="review">Start typing your beautiful comments......</label>
+													</div>
+											</div>
+											<div class="modal-footer">
+												<button type="submit" class="waves-effect green waves-green btn btn-large">Save <span><i class="fa fa-check"></i></span></button>
+												<a href="#!" class="modal-action red modal-close waves-effect waves-green btn btn-large">Would write later on <span><i class="fa fa-times"></i></span></a>
+											</div>
+										</form>
+									</div>
+								{% else %}
+									<a href="{% url 'accounts:login' %}" class="btn red">Login to start writing reviews !</a>
+								{% endif %}
+							{% endif %}
+						</div>
+						<!-- ./Review Modal -->
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}
