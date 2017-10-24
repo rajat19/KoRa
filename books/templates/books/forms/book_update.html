@@ -11,6 +11,7 @@
 						<form action="" method="POST" enctype="multipart/form-data">
 							{% csrf_token %}
 							{% include 'books/form_template.html' %}
+							{% include 'kora/forms/error.html' %}
 							<div class="row">
 						    	<div class="input-field col s12">
 						    		<button class="btn waves-effect waves-light green lighten-1" type="submit">Update Details

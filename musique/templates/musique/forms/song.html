@@ -10,10 +10,8 @@
 						<span class="card-title">Add New Song</span>
 						<form action="" method="POST" enctype="multipart/form-data">
 							{% csrf_token %}
-							{% include 'common/forms/template.html' %}
-							{% if form.error %}
-								{{ form.error }}
-							{% endif %}
+							{% include 'kora/forms/template.html' %}
+							{% include 'kora/forms/error.html' %}
 							<div class="row">
 						    	<div class="input-field col s12">
 						    		<button class="btn waves-effect waves-light green lighten-1" type="submit">Add Song
