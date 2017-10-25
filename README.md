@@ -1,6 +1,10 @@
+[![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)](https://www.djangoproject.com)
+[![Open Issues](https://img.shields.io/github/issues-raw/rajat19/kora.svg)](https://www.github.com/rajat19/kora)
+[![GitHub contributors](https://img.shields.io/github/contributors/rajat19/kora.svg)]()
+[![GitHub last commit](https://img.shields.io/github/last-commit/rajat19/kora.svg)]()
+
 # KORA
 KoRa is a platform for sharing of books, music and videos. It is developed on python django framework.
-[![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)](https://www.djangoproject.com) [![Open Issues](https://img.shields.io/github/issues-raw/rajat19/kora.svg)](https://www.github.com/rajat19/kora) [![GitHub contributors](https://img.shields.io/github/contributors/rajat19/kora.svg)]() [![GitHub last commit](https://img.shields.io/github/last-commit/rajat19/kora.svg)]()
 
 ## Requirements
 Requirements are provided in the requirements.txt file
