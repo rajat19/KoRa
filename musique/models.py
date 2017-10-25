@@ -25,7 +25,7 @@ class SongArtist(models.Model):
 		self.updatedAt = timezone.now()
 		super(SongArtist, self).save(*args, **kwargs)
 
-class Genre(models.Model):
+class SongGenre(models.Model):
 	slug = models.SlugField(max_length=40, unique=True)
 	name = models.CharField(max_length=100)
 	createdAt = models.DateTimeField(null=True, blank=True)
@@ -39,14 +39,14 @@ class Genre(models.Model):
 			self.createdAt = timezone.now()
 
 		self.updatedAt = timezone.now()
-		super(Genre, self).save(*args, **kwargs)
+		super(SongGenre, self).save(*args, **kwargs)
 
 class SongAlbum(models.Model):
 	slug = models.SlugField(max_length=40, unique=True)
 	artist = models.ForeignKey(SongArtist)
 	name = models.CharField(max_length=250, unique=True)
 	release_date = models.DateTimeField(null=True, blank=True)
-	genre = models.ManyToManyField(Genre)
+	genre = models.ManyToManyField(SongGenre)
 	logo = models.FileField(null=True, blank=True)
 	logo_url = models.CharField(null=True, blank=True, max_length=250)
 	popularity = models.IntegerField(default=0)
@@ -72,7 +72,7 @@ class Song(models.Model):
 	name = models.CharField(max_length=250)
 	artist = models.ForeignKey(SongArtist, on_delete=models.CASCADE)
 	album = models.ForeignKey(SongAlbum, on_delete=models.CASCADE)
-	genre = models.ManyToManyField(Genre)
+	genre = models.ManyToManyField(SongGenre)
 	language = models.CharField(max_length=40, null=True)
 	duration = models.CharField(max_length=10, null=True)
 	likes = models.IntegerField(default=0)
