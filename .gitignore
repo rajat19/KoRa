@@ -56,3 +56,6 @@ media*/
 
 # All templates/test.html
 */*/*/test.html
+
+# Environment variables
+.env

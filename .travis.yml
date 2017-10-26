@@ -14,6 +14,6 @@ install:
   - pip install -r requirements.txt
   - pip install -q Django==$DJANGO_VERSION
 # command to run tests
-# script:
-#   - pytest 
+script:
+  - python manage.py test musique.tests
 # or py.test for Python versions 3.5 and below
