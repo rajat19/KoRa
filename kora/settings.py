@@ -11,21 +11,23 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from dotenv import Dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+DOTENV_PATH = os.path.join(BASE_DIR, '.env')
+os.environ.update(Dotenv(DOTENV_PATH))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep these settings in production secret!
-SECRET_KEY = 'i)shwc38w&ma8dwvuf)-6x6&$*j^z@8l6r69kr=wd3w557o&v5'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '283740368654-peskahtgu6fnoqg2tfp211khi4h59n2o.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'QzEWSLvprb0dzWKR4PyNZz6Y'
+SECRET_KEY = os.environ.get("SECRET_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG") or False
 
 ALLOWED_HOSTS = []
 
@@ -160,4 +162,3 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'accounts:profile'
-SITE_ID = 1 #used in django allauth
