@@ -45,7 +45,7 @@ class SongAlbum(models.Model):
 	slug = models.SlugField(max_length=40, unique=True)
 	artist = models.ForeignKey(SongArtist)
 	name = models.CharField(max_length=250, unique=True)
-	release_date = models.DateTimeField(null=True, blank=True)
+	release_date = models.DateField(null=True, blank=True)
 	genre = models.ManyToManyField(SongGenre)
 	logo = models.FileField(null=True, blank=True)
 	logo_url = models.CharField(null=True, blank=True, max_length=250)
