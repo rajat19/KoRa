@@ -15,7 +15,7 @@ from dotenv import load_dotenv, find_dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DOTENV_PATH = os.path.join(BASE_DIR, '.env') or os.path.join(BASE_DIR, '.env.example')
+DOTENV_PATH = os.path.join(BASE_DIR, '.env.example')
 # os.environ.update(Dotenv(DOTENV_PATH))
 load_dotenv(find_dotenv(), override=True)
 
