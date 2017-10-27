@@ -1,12 +1,7 @@
 language: python
 python:
   - "2.7"
-  - "3.2"
-  - "3.3"
   - "3.6"
-  - "3.6-dev" # 3.6 development branch
-  - "3.7-dev" # 3.7 development branch
-  - "nightly"
 env:
   - DJANGO_VERSION=1.11.2
 # command to install dependencies
