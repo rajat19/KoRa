@@ -1,3 +1,4 @@
+[![Travis build](https://api.travis-ci.org/rajat19/KoRa.svg?branch=master)](https://travis-ci.org/rajat19/KoRa)
 [![PyPI](https://img.shields.io/pypi/pyversions/Django.svg)](https://www.djangoproject.com)
 [![Open Issues](https://img.shields.io/github/issues-raw/rajat19/kora.svg)](https://www.github.com/rajat19/kora)
 [![GitHub contributors](https://img.shields.io/github/contributors/rajat19/kora.svg)]()
