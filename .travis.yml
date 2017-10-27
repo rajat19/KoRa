@@ -15,5 +15,5 @@ install:
   - pip install -q Django==$DJANGO_VERSION
 # command to run tests
 script:
+  - py.test -v --color=yes --exitfirst --showlocals --durations=5
   - python manage.py test musique.tests
-# or py.test for Python versions 3.5 and below
