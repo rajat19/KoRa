@@ -16,14 +16,13 @@ from dotenv import load_dotenv, find_dotenv
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOTENV_PATH = os.path.join(BASE_DIR, '.env')
-# os.environ.update(Dotenv(DOTENV_PATH))
 load_dotenv(find_dotenv(), override=True)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep these settings in production secret!
-SECRET_KEY = 'i)shwc38w&ma8dwvuf)-6x6&$*j^z@8l6r69kr=wd3w557o&v5'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
@@ -50,7 +49,7 @@ INSTALLED_APPS = [
     'social_django',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -91,29 +90,21 @@ DATABASES = {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': os.environ.get("DB_NAME"),
-    #     'USER': os.environ.get("DB_USER"),
-    #     'PASSWORD': os.environ.get("DB_PASSWORD"),
-    #     'HOST': os.environ.get("DB_HOST"),
-    #     'PORT': os.environ.get("DB_PORT"),
-    # }
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kora',
-        'USER': 'root',
-        'PASSWORD': 'smartprix',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.environ.get("DB_NAME"),
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
     }
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': os.environ.get("DB_NAME"),
-    #     'USER': os.environ.get("DB_USER"),
-    #     'PASSWORD': os.environ.get("DB_PASSWORD"),
-    #     'HOST': os.environ.get("DB_HOST"),
-    #     'PORT': os.environ.get("DB_PORT"),
+    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #     'NAME': 'kora',
+    #     'USER': 'root',
+    #     'PASSWORD': 'smartprix',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
     # }
 }
 
@@ -166,3 +157,4 @@ STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'accounts:profile'
+SITE_ID = 1
