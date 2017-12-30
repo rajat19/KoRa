@@ -25,6 +25,7 @@ load_dotenv(find_dotenv(), override=True)
 SECRET_KEY = os.environ.get("SECRET_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE = os.environ.get("GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG") or False
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'musique.apps.MusiqueConfig',
     # 'videos.apps.VideosConfig',
     'social_django',
+    'gdstorage',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -98,14 +100,6 @@ DATABASES = {
         'HOST': os.environ.get("DB_HOST"),
         'PORT': os.environ.get("DB_PORT"),
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #     'NAME': 'kora',
-    #     'USER': 'root',
-    #     'PASSWORD': 'smartprix',
-    #     'HOST': 'localhost',
-    #     'PORT': '5432',
-    # }
 }
 
 

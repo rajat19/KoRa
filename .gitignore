@@ -60,5 +60,6 @@ media*/
 # Environment variables
 .env
 
-# Garbage Folder
+# My Folders
 garbage/
+private/

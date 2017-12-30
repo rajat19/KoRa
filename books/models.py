@@ -3,7 +3,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from gdstorage.storage import GoogleDriveStorage
 
+gd_storage = GoogleDriveStorage()
 class BookSeries(models.Model):
 	title = models.CharField(max_length=250, unique=True)
 	no_of_books = models.CharField(max_length=2)
@@ -39,7 +41,7 @@ class Book(models.Model):
 	synopsis = models.TextField(max_length=1000)
 	year = models.CharField(null=True, blank=True, max_length=4)
 	logo = models.CharField(max_length=300, blank=True)
-	logo_file = models.FileField(blank=True)
+	logo_file = models.FileField(blank=True, upload_to='/book/logo', storage=gd_storage)
 
 	def __str__(self):
 		return self.title
@@ -56,7 +58,7 @@ class Book(models.Model):
 class BookUpload(models.Model):
 	book = models.ForeignKey(Book, null=True)
 	uploader = models.ForeignKey(User, on_delete=models.CASCADE)
-	file = models.FileField()
+	file = models.FileField(upload_to='/book/upload', storage=gd_storage)
 	# file_type = models.CharField(max_length=4)
 	no_of_downloads = models.CharField(max_length=5, default='0')
 
