@@ -13,7 +13,9 @@
 						</div>
 						<div class="card-content" style="padding: 5px;">
 							<!-- <span class="card-title">{{book.title}}</span> -->
-							<img src="{{ book.logo_file.url }}" class="img responsive-img img-enhance" style="height: 200px;">
+							{% if book.logo_url %}
+								<img src="{{ book.logo_url }}" class="img responsive-img" style="height: 300px">
+							{% endif %}
 						</div>
 					</div>
 				</a>

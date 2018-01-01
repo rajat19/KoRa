@@ -13,10 +13,8 @@
 						<span class="card-title center">{{book.title}}</span>
 						<div class="row">
 							<div class="col m4 s12 center">
-								{% if book.logo_file %}
-									<img src="{{ book.logo_file.url }}" class="img responsive-img" style="height: 300px">
-								{% elif book.logo %}
-									<img src="{{ book.logo }}" class="img responsive-img" style="height: 300px">
+								{% if book.logo_url %}
+									<img src="{{ book.logo_url }}" class="img responsive-img" style="height: 300px">
 								{% endif %}
 								<div class="fixed-action-btn click-to-toggle horizontal">
 									<a class="btn-floating btn-large deep-orange">

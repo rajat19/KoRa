@@ -17,7 +17,9 @@
 										<div class="card z-depth-5">
 											<div class="card-content">
 												<span class="card-title">{{book.title}}</span>
-												<img src="{{ book.logo_file.url }}" class="img responsive-img" style="height: 350px;">
+												{% if book.logo_url %}
+													<img src="{{ book.logo_url }}" class="img responsive-img" style="height: 300px">
+												{% endif %}
 											</div>
 										</div>
 									</a>
