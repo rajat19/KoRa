@@ -46,6 +46,16 @@ class Book(models.Model):
 	def __str__(self):
 		return self.title
 
+	def logo_url(self):
+		if self.logo:
+			return self.logo
+		if self.logo_file:
+			url = self.logo_file.url
+			substr = url[32:65]
+			newurl = url[:25] + 'uc?id=' + substr
+			return newurl
+		return False
+
 	def get_absolute_url(self):
 		return reverse('books:detail', kwargs={'pk': self.pk})
 
