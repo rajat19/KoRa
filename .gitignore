@@ -60,6 +60,11 @@ media*/
 # Environment variables
 .env
 
-# My Folders
+# VS Code
+.vscode/*
+!.vscode/launch.json
+
+# Private (production) data
 garbage/
 private/
+*.private.*
