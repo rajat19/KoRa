@@ -9,6 +9,9 @@ gd_storage = GoogleDriveStorage()
 class BookSeries(models.Model):
 	title = models.CharField(max_length=250, unique=True)
 	no_of_books = models.CharField(max_length=2)
+	createdAt = models.DateTimeField(null=True, blank=True)
+	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
+	deletedAt = models.DateTimeField(null=True, blank=True)
 
 	def __str__(self):
 		return self.title
@@ -22,6 +25,9 @@ class BookSeries(models.Model):
 class BookAuthor(models.Model):
 	name = models.CharField(max_length=100)
 	country = models.CharField(max_length=100, blank=True)
+	createdAt = models.DateTimeField(null=True, blank=True)
+	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
+	deletedAt = models.DateTimeField(null=True, blank=True)
 
 	def __str__(self):
 		return self.name
@@ -42,6 +48,9 @@ class Book(models.Model):
 	year = models.CharField(null=True, blank=True, max_length=4)
 	logo = models.CharField(max_length=300, blank=True)
 	logo_file = models.FileField(blank=True, upload_to='/book/logo', storage=gd_storage)
+	createdAt = models.DateTimeField(null=True, blank=True)
+	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
+	deletedAt = models.DateTimeField(null=True, blank=True)
 
 	def __str__(self):
 		return self.title
@@ -71,6 +80,9 @@ class BookUpload(models.Model):
 	file = models.FileField(upload_to='/book/upload', storage=gd_storage)
 	# file_type = models.CharField(max_length=4)
 	no_of_downloads = models.CharField(max_length=5, default='0')
+	createdAt = models.DateTimeField(null=True, blank=True)
+	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
+	deletedAt = models.DateTimeField(null=True, blank=True)
 
 	def extension(self):
 		fname, extension = os.path.splitext(self.file.name)
@@ -80,6 +92,9 @@ class BookSearch(models.Model):
 	searchedBy = models.ForeignKey(User, on_delete=models.CASCADE)
 	query = models.CharField(max_length=50, default='')
 	searchedAt = models.DateTimeField(null=True)
+	createdAt = models.DateTimeField(null=True, blank=True)
+	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
+	deletedAt = models.DateTimeField(null=True, blank=True)
 
 	class Meta:
 		verbose_name_plural = 'search'
