@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # 'videos.apps.VideosConfig',
     'social_django',
     'gdstorage',
+    'django_countries',
 ]
 
 MIDDLEWARE_CLASSES = [

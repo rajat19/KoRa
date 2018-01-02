@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils import timezone
+from django_countries.fields import CountryField
 from gdstorage.storage import GoogleDriveStorage
 
 gd_storage = GoogleDriveStorage()
@@ -24,7 +25,7 @@ class BookSeries(models.Model):
 
 class BookAuthor(models.Model):
 	name = models.CharField(max_length=100)
-	country = models.CharField(max_length=100, blank=True)
+	country = CountryField(blank_label='India')
 	createdAt = models.DateTimeField(null=True, blank=True)
 	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
 	deletedAt = models.DateTimeField(null=True, blank=True)
