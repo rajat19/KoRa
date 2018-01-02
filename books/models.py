@@ -20,6 +20,13 @@ class BookSeries(models.Model):
 	def get_absolute_url(self):
 		return reverse('books:series', kwargs={'pk': self.pk})
 
+	def save(self, *args, **kwargs):
+		if not self.createdAt:
+			self.createdAt = timezone.now()
+
+		self.updatedAt = timezone.now()
+		return super(BookSeries, self).save(*args, **kwargs)
+
 	class Meta:
 		verbose_name_plural = 'series'
 
@@ -35,6 +42,13 @@ class BookAuthor(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('books:author', kwargs={'pk': self.pk})
+
+	def save(self, *args, **kwargs):
+		if not self.createdAt:
+			self.createdAt = timezone.now()
+
+		self.updatedAt = timezone.now()
+		return super(BookAuthor, self).save(*args, **kwargs)
 
 	class Meta:
 		unique_together = ['name', 'country']
@@ -72,6 +86,13 @@ class Book(models.Model):
 	def get_fields(self):
 		return [(field.name, field.value_to_string(self)) for field in Book._meta.fields]
 
+	def save(self, *args, **kwargs):
+		if not self.createdAt:
+			self.createdAt = timezone.now()
+
+		self.updatedAt = timezone.now()
+		return super(Book, self).save(*args, **kwargs)
+
 	class Meta:
 		unique_together = ['title', 'author']
 
@@ -89,6 +110,13 @@ class BookUpload(models.Model):
 		fname, extension = os.path.splitext(self.file.name)
 		return extension
 
+	def save(self, *args, **kwargs):
+		if not self.createdAt:
+			self.createdAt = timezone.now()
+
+		self.updatedAt = timezone.now()
+		return super(BookUpload, self).save(*args, **kwargs)
+
 class BookSearch(models.Model):
 	searchedBy = models.ForeignKey(User, on_delete=models.CASCADE)
 	query = models.CharField(max_length=50, default='')
@@ -97,6 +125,12 @@ class BookSearch(models.Model):
 	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
 	deletedAt = models.DateTimeField(null=True, blank=True)
 
+	def save(self, *args, **kwargs):
+		if not self.createdAt:
+			self.createdAt = timezone.now()
+
+		self.updatedAt = timezone.now()
+		return super(BookSearch, self).save(*args, **kwargs)
 	class Meta:
 		verbose_name_plural = 'search'
 
