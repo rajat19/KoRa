@@ -1,5 +1,6 @@
 import os
 from django.db import models
+from django.conf.global_settings import LANGUAGES
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils import timezone
@@ -56,7 +57,7 @@ class BookAuthor(models.Model):
 class Book(models.Model):
 	author = models.ForeignKey(BookAuthor, blank=True, default='')
 	title = models.CharField(max_length=250)
-	language = models.CharField(max_length=100, blank=True, null=True)
+	language = models.CharField(max_length=7, blank=True, null=True, choices=LANGUAGES)
 	genre = models.CharField(max_length=200)
 	series = models.ForeignKey(BookSeries, null=True, blank=True, default='')
 	synopsis = models.TextField(max_length=1000)
