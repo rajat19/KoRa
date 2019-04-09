@@ -60,9 +60,10 @@ media*/
 # Environment variables
 .env
 
-# VS Code
+# VS Code/ IDEA
 .vscode/*
 !.vscode/launch.json
+.idea
 
 # Private (production) data
 garbage/

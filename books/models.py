@@ -2,153 +2,152 @@ import os
 from django.db import models
 from django.conf.global_settings import LANGUAGES
 from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
-from django.utils import timezone
+from django.urls import reverse
+from django.utils.text import  slugify
 from django_countries.fields import CountryField
 from gdstorage.storage import GoogleDriveStorage
+from common.models import SoftDeletionModel, TimestampModel
 
 gd_storage = GoogleDriveStorage()
-class BookSeries(models.Model):
-	title = models.CharField(max_length=250, unique=True)
-	no_of_books = models.CharField(max_length=2)
-	createdAt = models.DateTimeField(null=True, blank=True)
-	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
-	deletedAt = models.DateTimeField(null=True, blank=True)
 
-	def __str__(self):
-		return self.title
 
-	def get_absolute_url(self):
-		return reverse('books:series', kwargs={'pk': self.pk})
+class BookSeries(SoftDeletionModel):
+    slug = models.SlugField(max_length=40, unique=True)
+    title = models.CharField(max_length=250, unique=True)
+    no_of_books = models.CharField(max_length=2)
 
-	def save(self, *args, **kwargs):
-		if not self.createdAt:
-			self.createdAt = timezone.now()
+    def __str__(self):
+        return self.title
 
-		self.updatedAt = timezone.now()
-		return super(BookSeries, self).save(*args, **kwargs)
+    @staticmethod
+    def get_absolute_url():
+        return reverse('books:series')
 
-	class Meta:
-		verbose_name_plural = 'series'
+    @staticmethod
+    def db_fields():
+        return ['title', 'no_of_books']
 
-class BookAuthor(models.Model):
-	name = models.CharField(max_length=100)
-	country = CountryField(blank_label='India')
-	createdAt = models.DateTimeField(null=True, blank=True)
-	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
-	deletedAt = models.DateTimeField(null=True, blank=True)
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        return super(BookSeries, self).save(*args, **kwargs)
 
-	def __str__(self):
-		return self.name
+    class Meta:
+        verbose_name_plural = 'series'
 
-	def get_absolute_url(self):
-		return reverse('books:author', kwargs={'pk': self.pk})
 
-	def save(self, *args, **kwargs):
-		if not self.createdAt:
-			self.createdAt = timezone.now()
+class BookAuthor(SoftDeletionModel):
+    slug = models.SlugField(max_length=40, unique=True)
+    name = models.CharField(max_length=100)
+    country = CountryField(blank_label='India')
 
-		self.updatedAt = timezone.now()
-		return super(BookAuthor, self).save(*args, **kwargs)
+    def __str__(self):
+        return self.name
 
-	class Meta:
-		unique_together = ['name', 'country']
+    @staticmethod
+    def get_absolute_url():
+        return reverse('books:author')
 
-class Book(models.Model):
-	author = models.ForeignKey(BookAuthor, blank=True, default='')
-	title = models.CharField(max_length=250)
-	language = models.CharField(max_length=7, blank=True, null=True, choices=LANGUAGES)
-	genre = models.CharField(max_length=200)
-	series = models.ForeignKey(BookSeries, null=True, blank=True, default='')
-	synopsis = models.TextField(max_length=1000)
-	year = models.CharField(null=True, blank=True, max_length=4)
-	logo = models.CharField(max_length=300, blank=True)
-	logo_file = models.FileField(blank=True, upload_to='/book/logo', storage=gd_storage)
-	createdAt = models.DateTimeField(null=True, blank=True)
-	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
-	deletedAt = models.DateTimeField(null=True, blank=True)
+    @staticmethod
+    def db_fields():
+        return ['name', 'country']
 
-	def __str__(self):
-		return self.title
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        return super(BookAuthor, self).save(*args, **kwargs)
 
-	def logo_url(self):
-		if self.logo:
-			return self.logo
-		if self.logo_file:
-			url = self.logo_file.url
-			substr = url[32:65]
-			newurl = url[:25] + 'uc?id=' + substr
-			return newurl
-		return False
+    class Meta:
+        unique_together = ['name', 'country']
 
-	def get_absolute_url(self):
-		return reverse('books:detail', kwargs={'pk': self.pk})
 
-	def get_fields(self):
-		return [(field.name, field.value_to_string(self)) for field in Book._meta.fields]
+class Book(SoftDeletionModel):
+    slug = models.SlugField(max_length=40, unique=True)
+    author = models.ForeignKey(BookAuthor, blank=True, default='')
+    title = models.CharField(max_length=250)
+    language = models.CharField(max_length=7, blank=True, null=True, choices=LANGUAGES)
+    genre = models.CharField(max_length=200)
+    series = models.ForeignKey(BookSeries, null=True, blank=True, default='')
+    synopsis = models.TextField(max_length=1000)
+    year = models.CharField(null=True, blank=True, max_length=4)
+    logo = models.CharField(max_length=300, blank=True)
+    logo_file = models.FileField(blank=True, upload_to='/book/logo', storage=gd_storage)
 
-	def save(self, *args, **kwargs):
-		if not self.createdAt:
-			self.createdAt = timezone.now()
+    def __str__(self):
+        return self.title
 
-		self.updatedAt = timezone.now()
-		return super(Book, self).save(*args, **kwargs)
+    def logo_url(self):
+        if self.logo:
+            return self.logo
+        if self.logo_file:
+            url = self.logo_file.url
+            new_url = url[:25] + 'uc?id=' + url[32:65]
+            return new_url
+        return False
 
-	class Meta:
-		unique_together = ['title', 'author']
+    @staticmethod
+    def get_absolute_url():
+        return reverse('books:detail')
 
-class BookUpload(models.Model):
-	book = models.ForeignKey(Book, null=True)
-	uploader = models.ForeignKey(User, on_delete=models.CASCADE)
-	file = models.FileField(upload_to='/book/upload', storage=gd_storage)
-	# file_type = models.CharField(max_length=4)
-	no_of_downloads = models.CharField(max_length=5, default='0')
-	createdAt = models.DateTimeField(null=True, blank=True)
-	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
-	deletedAt = models.DateTimeField(null=True, blank=True)
+    @staticmethod
+    def db_fields():
+        return ['series', 'title', 'author', 'language', 'genre', 'synopsis', 'logo_file']
 
-	def extension(self):
-		fname, extension = os.path.splitext(self.file.name)
-		return extension
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Book._meta.fields]
 
-	def save(self, *args, **kwargs):
-		if not self.createdAt:
-			self.createdAt = timezone.now()
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        return super(Book, self).save(*args, **kwargs)
 
-		self.updatedAt = timezone.now()
-		return super(BookUpload, self).save(*args, **kwargs)
+    class Meta:
+        unique_together = ['title', 'author']
 
-class BookSearch(models.Model):
-	searchedBy = models.ForeignKey(User, on_delete=models.CASCADE)
-	query = models.CharField(max_length=50, default='')
-	searchedAt = models.DateTimeField(null=True)
-	createdAt = models.DateTimeField(null=True, blank=True)
-	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
-	deletedAt = models.DateTimeField(null=True, blank=True)
 
-	def save(self, *args, **kwargs):
-		if not self.createdAt:
-			self.createdAt = timezone.now()
+class BookUpload(SoftDeletionModel):
+    book = models.ForeignKey(Book, null=True)
+    uploader = models.ForeignKey(User, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='/book/upload', storage=gd_storage)
+    # file_type = models.CharField(max_length=4)
+    no_of_downloads = models.CharField(max_length=5, default='0')
 
-		self.updatedAt = timezone.now()
-		return super(BookSearch, self).save(*args, **kwargs)
-	class Meta:
-		verbose_name_plural = 'search'
+    def extension(self):
+        file_name, extension = os.path.splitext(self.file.name)
+        return extension
 
-class BookReview(models.Model):
-	book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
-	reviewer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-	review = models.TextField(max_length=1000)
-	createdAt = models.DateTimeField(null=True, blank=True)
-	updatedAt = models.DateTimeField(auto_now = True, null=True, blank=True)
-	deletedAt = models.DateTimeField(null=True, blank=True)
+    @staticmethod
+    def db_fields():
+        return ['book', 'file']
 
-	def __str__(self):
-		return self.review
+    def save(self, *args, **kwargs):
+        return super(BookUpload, self).save(*args, **kwargs)
 
-	def save(self, *args, **kwargs):
-		if not self.createdAt:
-			self.createdAt = timezone.now()
 
-		self.updatedAt = timezone.now()
-		return super(BookReview, self).save(*args, **kwargs)
+class BookSearch(TimestampModel):
+    searched_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    query = models.CharField(max_length=50, default='')
+    searched_at = models.DateTimeField(null=True)
+
+    @staticmethod
+    def db_fields():
+        return ['query']
+
+    def save(self, *args, **kwargs):
+        return super(BookSearch, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'search'
+
+
+class BookReview(SoftDeletionModel):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, null=True)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    review = models.TextField(max_length=1000)
+
+    def __str__(self):
+        return self.review
+
+    @staticmethod
+    def db_fields():
+        return ['book', 'reviewer', 'review']
+
+    def save(self, *args, **kwargs):
+        return super(BookReview, self).save(*args, **kwargs)
